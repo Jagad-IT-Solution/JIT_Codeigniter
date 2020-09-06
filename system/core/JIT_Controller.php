@@ -293,18 +293,10 @@ class JIT_Controller
         if ($this->config->item('check_api_key') && $use_key && $this->_allow === false) {
 
             if ($this->request->method == 'options') { exit; }
-
-            $this->load->library('user_agent');
+            
             $this->response([
                 $this->config->item('rest_status_field_name')  => false,
-                $this->config->item('rest_message_field_name') => sprintf($this->lang->line('text_rest_invalid_api_key'), $this->rest->key),
-                'details' => [
-                    'ip_addresses' => $this->input->ip_address(),
-                    'platform' => $this->agent->platform(),
-                    'browser' => $this->agent->browser(),
-                    'version' => $this->agent->version(),
-                    'User-Agent' => $this->agent->agent_string()
-                ]
+                $this->config->item('rest_message_field_name') => sprintf($this->lang->line('text_rest_invalid_api_key'), $this->rest->key)
             ], $this->HTTP_FORBIDDEN);
         }
 
