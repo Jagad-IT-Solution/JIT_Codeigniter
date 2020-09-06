@@ -6,21 +6,13 @@ class Welcome extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->allowed_http_methods = ['GET','POST'];
 	}
 
 	public function index()
 	{
-		$api_key_variable = $this->config->item('rest_key_name');
-        $key_name = 'HTTP_'.strtoupper(str_replace('-', '_', $api_key_variable));
-
-		if ($this->api_key == $this->input->server($key_name)) {
-			echo "ok";
-		}
-		var_dump('asd');
-	}
-
-	public function test($sa)
-	{
-		echo $sa;
+		$this->response([
+			'hello' => ':)'
+		]);
 	}
 }
