@@ -1,1 +1,1 @@
-# CodeIgniter - Custome
+# CodeIgniter - Custome Core
