@@ -1,0 +1,15 @@
+{
+    "name": "jagad_it/ci_custome",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Jagad IT Solutions",
+            "email": "admin@jagad-it.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.14",
+        "firebase/php-jwt": "^5.2"
+    }
+}

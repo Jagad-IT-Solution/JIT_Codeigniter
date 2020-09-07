@@ -1,12 +1,15 @@
-#Hilangkan Semua
-*
-#Kecuali Ini
-!*application/
-!*config/
-!*rest.php
 
-#Kecuali Ini
-!*system/
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
 
-#Kecuali Ini
-!*.htaccess
+
+application/*
+!application/config/rest.php
+
+
+!system/*
+
+.key
+
+
