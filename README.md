@@ -14,7 +14,7 @@
 	{
 		$data['data'] = "Jagad IT Solutions";
 		$this->pdf->setPaper('A4', 'potrait');
-    	$this->pdf->filename = "Jagad-IT-Solutions.pdf";
-    	$this->pdf->load_pdf('test_pdf', $data); # views/test_pdf.php
+    		$this->pdf->filename = "Jagad-IT-Solutions.pdf";
+    		$this->pdf->load_pdf('test_pdf', $data); # views/test_pdf.php
 	}
 ```
