@@ -8,6 +8,7 @@
 	public function __construct()
 	{
 		parent::__construct();
+		#See ALL config in config/rest.php
 		$this->allowed_http_methods = ['GET']; #Default ['GET',POST]
 	}
 

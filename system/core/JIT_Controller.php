@@ -155,8 +155,23 @@ class JIT_Controller
      *
      * @return void
      */
+    public $check_api_key;
+
+    public $api_key_variable;
+
+    public $key_file_name;
+
     protected function early_checks()
     {
+        if (!isset($this->check_api_key)) {
+           $this->check_api_key = $this->config->item('check_api_key');
+           $this->api_key_variable = $this->config->item('api_key_name');
+        }
+
+        if (!isset($this->key_file_name)) {
+           $this->key_file_name = $this->config->item('key_file_name');
+        }
+        
         $this->create_key();
     }
 
@@ -270,11 +285,11 @@ class JIT_Controller
 
     public function create_key()
     {
-        $files = '.key';
+        $files = '.'.$this->key_file_name;
         if (!file_exists($files)) {
             file_put_contents($files, password_hash(rand(), PASSWORD_DEFAULT));
         }
-        $this->api_key =  file_get_contents('./.key');
+        $this->api_key =  file_get_contents('./.'.$this->key_file_name);
     }
 
     public function _remap($method, $params = [])
@@ -288,13 +303,13 @@ class JIT_Controller
             ],$this->http_status['METHOD_NOT_ALLOWED']);
         }
 
-        if ($this->config->item('check_api_key') && $this->auth_override !== true) {
+        if ($this->check_api_key && $this->auth_override !== true) {
             $this->_allow = $this->_detect_api_key();
         }
 
         $use_key = !(isset($this->methods[$method]['key']) && $this->methods[$method]['key'] === false);
 
-        if ($this->config->item('check_api_key') && $use_key && $this->_allow === false) {
+        if ($this->check_api_key && $use_key && $this->_allow === false) {
 
             if ($this->request->method == 'options') { exit; }
             
@@ -321,9 +336,8 @@ class JIT_Controller
 
     protected function _detect_api_key()
     {
-        $api_key_variable = $this->config->item('rest_key_name');
-        $key_name = 'HTTP_'.strtoupper(str_replace('-', '_', $api_key_variable));
-        if (($this->rest->key = isset($this->_args[$api_key_variable]) ? $this->_args[$api_key_variable] : $this->input->server($key_name))) {
+        $key_name = 'HTTP_'.strtoupper(str_replace('-', '_', $this->api_key_variable));
+        if (($this->rest->key = isset($this->_args[$this->api_key_variable]) ? $this->_args[$this->api_key_variable] : $this->input->server($key_name))) {
             return $this->api_key === $this->rest->key;
         }
         return false;

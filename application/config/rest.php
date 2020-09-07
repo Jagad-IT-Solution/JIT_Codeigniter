@@ -14,6 +14,11 @@ setlocale(LC_ALL, 'id_ID');
 |
 */
 $config['check_api_key'] = TRUE;
+
+$config['key_file_name'] = 'key'; #Store api key for request, Output file in root dir
+
+$config['api_key_name'] = 'X-API-KEY';
+
 $config['token_expired'] = FALSE;
 
 /*
@@ -368,20 +373,6 @@ $config['rest_limits_method'] = 'ROUTED_URL';
 |
 */
 $config['rest_key_length'] = 40;
-
-/*
-|--------------------------------------------------------------------------
-| REST API Key Variable
-|--------------------------------------------------------------------------
-|
-| Custom header to specify the API key
-
-| Note: Custom headers with the X- prefix are deprecated as of
-| 2012/06/12. See RFC 6648 specification for more details
-|
-*/
-$config['rest_key_name'] = 'X-API-KEY';
-
 /*
 |--------------------------------------------------------------------------
 | REST Enable Logging
