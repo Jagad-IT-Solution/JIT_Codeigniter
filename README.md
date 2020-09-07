@@ -1,6 +1,24 @@
 # JIT_CodeIgniter - Custome System Core
 
 
+## Usage REST_API
+
+```php
+	public function __construct()
+	{
+		parent::__construct();
+		$this->allowed_http_methods = ['GET']; #Default ['GET',POST]
+	}
+
+	public function index()
+	{
+		$this->response([
+			'hello' => ':)'
+		]);
+	}
+```
+
+
 ## Usage PDF
 
 ```php
