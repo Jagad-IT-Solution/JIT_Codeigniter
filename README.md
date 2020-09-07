@@ -13,7 +13,7 @@
 	public function index()
 	{
 		$this->response([
-			'hello' => ':)'
+		'hello' => ':)'
 		]);
 	}
 ```
