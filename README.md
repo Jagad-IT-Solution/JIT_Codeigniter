@@ -8,7 +8,7 @@
 	{
 		parent::__construct();
 		$this->load->library('pdf');
-		#or autoload.php in $autoload['libraries'] = array('pdf');
+		#OR $autoload['libraries'] = array('pdf'); in config/autoload.php
 	}
 
 	public function index()
