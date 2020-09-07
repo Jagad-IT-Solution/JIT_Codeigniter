@@ -24,7 +24,7 @@ class CI_Pdf extends Dompdf
 	public function __construct($config = [])
 	{ 
 		parent::__construct($config);
-        log_message('info', 'Dompdf Class Initialized');
+        log_message('info', 'PDF Class Initialized');
 		$this->CI =& get_instance();
 	}
 

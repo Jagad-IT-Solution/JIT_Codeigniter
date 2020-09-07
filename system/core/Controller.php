@@ -66,4 +66,26 @@ class CI_Controller extends JIT_Controller {
     {
         $this->response($data, $http_code, true);
     }
+
+    public function myRange($end_column = '', $first_letters = '') {
+	    $columns = array();
+	    $length = strlen($end_column);
+	    $letters = range('A', 'Z');
+	    foreach ($letters as $letter) {
+	      $column = $first_letters . $letter; 
+	      $columns[] = $column;
+	      if ($column == $end_column)
+	          return $columns;
+	    }
+
+	    foreach ($columns as $column) {
+	      if (!in_array($end_column, $columns) && strlen($column) < $length) {
+	          $new_columns = $this->myRange($end_column, $column);
+	          // Merge the new columns which were created with the final columns array.
+	          $columns = array_merge($columns, $new_columns);
+	      }
+	    }
+	    return $columns;
+	}
+	
 }
