@@ -200,7 +200,11 @@ class JIT_Controller
 
         $this->_supported_formats = array_intersect_key($this->_supported_formats, array_flip($supported_formats));
 
-        $this->lang->load($this->config->item('rest_language'));
+        $language = $this->config->item('rest_language');
+        if ($language === null) {
+            $language = 'english';
+        }
+        $this->lang->load('rest_controller', $language, false, true, __DIR__.'/../');
 
         $this->request = new stdClass();
         $this->response = new stdClass();
