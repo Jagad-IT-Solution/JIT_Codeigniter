@@ -4,6 +4,7 @@
 ## Usage REST_API
 
 ```php
+	#IN Controller
 	public function __construct()
 	{
 		parent::__construct();
@@ -13,8 +14,8 @@
 	public function index()
 	{
 		$this->response([
-		'hello' => ':)'
-		]);
+			'hello' => ':)'
+		],$this->HTTP_OK); #or 200 INT
 	}
 ```
 
