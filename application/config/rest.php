@@ -13,7 +13,7 @@ setlocale(LC_ALL, 'id_ID');
 | Set to force the use of HTTPS for REST API calls
 |
 */
-$config['check_api_key'] = TRUE;
+$config['check_api_key'] = FALSE;
 
 $config['key_file_name'] = 'key'; #Store api key for request, Output file in root dir
 
