@@ -76,6 +76,7 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'SMSGatewayMe\\Client\\' => 20,
         ),
         'P' => 
         array (
@@ -107,6 +108,10 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'SMSGatewayMe\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/smsgatewayme/client/lib',
         ),
         'Psr\\SimpleCache\\' => 
         array (
