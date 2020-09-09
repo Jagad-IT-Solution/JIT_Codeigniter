@@ -31,7 +31,7 @@ $config['api_key_name'] = 'X-API-KEY';
 */
 $config['token_expired'] = FALSE;
 $config['token_header']      = 'x-token';
-$config['jwt_algorithm']     = 'RS256';
+$config['jwt_algorithm']     = 'HS256';
 /*
 |--------------------------------------------------------------------------
 | REST Output Format
