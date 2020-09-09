@@ -402,6 +402,18 @@ class JIT_Controller
         }
     }
 
+
+    public function tokenIsExist($headers)
+    {
+        if(!empty($headers) AND is_array($headers)) {
+            foreach ($headers as $header_name => $header_value) {
+                if (strtolower(trim($header_name)) == strtolower(trim($this->token_header)))
+                    return ['status' => TRUE, 'token' => str_replace('Bearer ', '', $header_value)];
+            }
+        }
+        return ['status' => FALSE, 'message' => 'Token is not defined.'];
+    }
+
     public function create_key()
     {
         $files = '.'.$this->key_file_name;
