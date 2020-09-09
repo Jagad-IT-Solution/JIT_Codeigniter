@@ -368,9 +368,11 @@ class JIT_Controller
 
                 if(!empty($token_decode) AND is_object($token_decode)){
                     // Check Token API Time [exp]
-                    if (empty($token_decode->exp OR !is_numeric($token_decode->exp))) {
+                    if ($this->token_expired != FALSE) {
+                        if (empty($token_decode->exp OR !is_numeric($token_decode->exp))) {
 
-                        $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'],403);
+                            $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'],403);
+                        }
                     }
                     else{
                         /**
