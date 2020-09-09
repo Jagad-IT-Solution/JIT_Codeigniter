@@ -13,14 +13,25 @@ setlocale(LC_ALL, 'id_ID');
 | Set to force the use of HTTPS for REST API calls
 |
 */
-$config['check_api_key'] = FALSE;
+$config['check_api_key'] = TRUE;
 
 $config['key_file_name'] = 'key'; #Store api key for request, Output file in root dir
 
 $config['api_key_name'] = 'X-API-KEY';
 
-$config['token_expired'] = FALSE;
+/*
+|-----------------------
+| Token Expire Time
 
+| https://www.tools4noobs.com/online_tools/hh_mm_ss_to_seconds/
+|--------------------------------------------------------------------------
+| ( 1 Day ) : 60 * 60 * 24 = 86400
+| ( 1 Hour ) : 60 * 60     = 3600
+| ( 1 Minute ) : 60        = 60
+*/
+$config['token_expired'] = FALSE;
+$config['token_header']      = 'x-token';
+$config['jwt_algorithm']     = 'RS256'
 /*
 |--------------------------------------------------------------------------
 | REST Output Format

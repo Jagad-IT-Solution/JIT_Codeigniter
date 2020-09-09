@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
+use \Firebase\JWT\JWT;
 require 'Format.php';
 class JIT_Controller
 {
@@ -162,6 +163,16 @@ class JIT_Controller
 
     public $key_file_name;
 
+    /**
+    * Token Request Header Name
+    */
+    protected $token_header;
+    protected $token_algorithm;
+   /**
+    * Token Expire Time
+    */
+    protected $token_expired; 
+
     protected function early_checks()
     {
         if (!isset($this->check_api_key)) {
@@ -189,6 +200,11 @@ class JIT_Controller
         $this->_enable_xss = ($this->config->item('global_xss_filtering') === true);
         $this->checkmethod = $this->config->item('check_method');
         $this->output->parse_exec_vars = false;
+
+        $this->token_algorithm    = $this->config->item('jwt_algorithm');
+        $this->token_header       = $this->config->item('token_header');
+        $this->token_expired  = $this->config->item('token_expired');
+
 
         if ($this->config->item('rest_enable_logging') === true) {
             $this->_start_rtime = microtime(true);
@@ -282,6 +298,109 @@ class JIT_Controller
     public static function &get_instance()
     {
         return self::$instance;
+    }
+
+    function pass_hash($password) {
+        $pass    = md5(sha1(md5($password)));
+        $options = ['cost' => 10];
+        return password_hash($pass, PASSWORD_DEFAULT, $options);
+    }
+
+    function pass_verify($password, $hash) {
+        $pass = md5(sha1(md5($password)));
+        return password_verify($pass, $hash);
+    }
+
+    public function creatToken($data = null)
+    {
+        if ($data AND is_array($data)){
+            $data['iss'] = 'JAGAD IT SOLUTIONS';
+            $data['aud'] = 'JIT';
+            $data['iat'] =  time();
+            if ($this->token_expired != FALSE) {
+                 $data['exp'] =  time() + $this->token_expired;
+            }
+           
+            try {
+                return JWT::encode($data, $this->api_key, $this->token_algorithm);
+            }
+            catch(Exception $e) {
+                return ['status' => FALSE, 'message' => $e->getMessage()];
+            }
+        } else {
+            return ['status' => FALSE, 'message' => "Token Data Undefined!"];
+        }
+    }
+
+    public function decodeToken($token)
+    {
+        try {
+            return JWT::decode($token, $this->api_key, array($this->token_algorithm));
+        }
+        catch(Exception $e) {
+            return ['status' => FALSE, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function validateToken()
+    {
+        /**
+         * Request All Headers
+         */
+        $headers = $this->input->request_headers();
+        
+        /**
+         * Authorization Header Exists
+         */
+        $token_data = $this->tokenIsExist($headers);
+        if($token_data['status'] === TRUE)
+        {
+            try
+            {
+                /**
+                 * Token Decode
+                 */
+                try {
+                    $token_decode = JWT::decode($token_data['token'], $this->api_key, array($this->token_algorithm));
+                }
+                catch(Exception $e) {
+                   $this->response(['status' => FALSE, 'message' => $e->getMessage()],500);
+                }
+
+                if(!empty($token_decode) AND is_object($token_decode)){
+                    // Check Token API Time [exp]
+                    if (empty($token_decode->exp OR !is_numeric($token_decode->exp))) {
+
+                        $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'],403);
+                    }
+                    else{
+                        /**
+                         * Check Token Time Valid 
+                         */
+                        return ['status' => TRUE, 'data' => $token_decode];
+                        // $time_difference = strtotime('now') - $token_decode->exp;
+                        // if( $time_difference >= $this->token_expired ){
+                        //    $this->response(['status' => FALSE, 'message' => 'Token Time Expire.'],403);
+                        // }else{
+                        //     /**
+                        //      * All Validation False Return Data
+                        //      */
+                        //     return ['status' => TRUE, 'data' => $token_decode];
+                        // }
+                    }
+                    
+                }else{
+                    $this->response(['status' => FALSE, 'message' => 'Forbidden'],403);
+                }
+            }
+            catch(Exception $e) {
+                $this->response(['status' => FALSE, 'message' => $e->getMessage()],500);
+            }
+        }else
+        {
+            // Authorization Header Not Found!
+            $this->response(['status' => FALSE, 'message' => $token_data['message'] ],403);
+        }
     }
 
     public function create_key()
