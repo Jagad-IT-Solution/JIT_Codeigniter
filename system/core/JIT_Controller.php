@@ -320,7 +320,6 @@ class JIT_Controller
             if ($this->token_expired != FALSE) {
                  $data['exp'] =  time() + $this->token_expired;
             }
-           
             try {
                 return JWT::encode($data, $this->api_key, $this->token_algorithm);
             }
