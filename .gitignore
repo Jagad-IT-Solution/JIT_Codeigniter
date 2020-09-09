@@ -5,7 +5,7 @@ application/logs/*
 
 
 application/*
-!application/config/rest.php
+
 
 
 !system/*
