@@ -1,4 +1,11 @@
 <?php
+/**
+ * @package	CodeIgniter
+ * @author	Jagad IT Solutions Dev Team
+ * @since	Version 1.0.0
+ * @filesource
+ */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 use GuzzleHttp\Client;
 
