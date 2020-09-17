@@ -9,6 +9,7 @@
     "require": {
         "phpoffice/phpspreadsheet": "^1.14",
         "firebase/php-jwt": "^5.2",
-        "smsgatewayme/client": "^0.0.1"
+        "smsgatewayme/client": "^0.0.1",
+        "guzzlehttp/guzzle": "7.0"
     }
 }
