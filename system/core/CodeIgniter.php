@@ -36,6 +36,7 @@
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once BASEPATH.'vendor/autoload.php';
 
 /**
  * System Initialization File

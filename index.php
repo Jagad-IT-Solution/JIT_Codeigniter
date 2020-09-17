@@ -312,5 +312,4 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
-require_once BASEPATH.'vendor/autoload.php';
 require_once BASEPATH.'core/CodeIgniter.php';
