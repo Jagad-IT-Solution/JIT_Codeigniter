@@ -509,10 +509,6 @@ class JIT_Controller
             return $this->_post_args;
         }
 
-        if(empty($_POST)) {
-            $_POST = json_decode(file_get_contents('php://input'),true); 
-            return isset($_POST[$key]) ? $_POST[$key] : isset($this->_post_args[$key]) ? $this->_xss_clean($this->_post_args[$key], $xss_clean) : null;
-        }
         return isset($this->_post_args[$key]) ? $this->_xss_clean($this->_post_args[$key], $xss_clean) : null;
     }
 
