@@ -96,6 +96,79 @@
         ]
     },
     {
+        "name": "endroid/qr-code",
+        "version": "3.9.1",
+        "version_normalized": "3.9.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/endroid/qr-code.git",
+            "reference": "8605e2c958ed568788da4e16bd8a9502e32f375f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/endroid/qr-code/zipball/8605e2c958ed568788da4e16bd8a9502e32f375f",
+            "reference": "8605e2c958ed568788da4e16bd8a9502e32f375f",
+            "shasum": ""
+        },
+        "require": {
+            "bacon/bacon-qr-code": "^2.0",
+            "ext-gd": "*",
+            "khanamiryan/qrcode-detector-decoder": "^1.0.2",
+            "myclabs/php-enum": "^1.5",
+            "php": ">=7.2",
+            "symfony/options-resolver": "^3.4||^4.4||^5.0",
+            "symfony/property-access": "^3.4||^4.4||^5.0"
+        },
+        "require-dev": {
+            "endroid/quality": "dev-master",
+            "setasign/fpdf": "^1.8"
+        },
+        "suggest": {
+            "roave/security-advisories": "Avoids installation of package versions with vulnerabilities",
+            "setasign/fpdf": "Required to use the FPDF writer.",
+            "symfony/security-checker": "Checks your composer.lock for vulnerabilities"
+        },
+        "time": "2020-07-10T10:16:06+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Endroid\\QrCode\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jeroen van den Enden",
+                "email": "info@endroid.nl"
+            }
+        ],
+        "description": "Endroid QR Code",
+        "homepage": "https://github.com/endroid/qr-code",
+        "keywords": [
+            "bundle",
+            "code",
+            "endroid",
+            "php",
+            "qr",
+            "qrcode"
+        ],
+        "funding": [
+            {
+                "url": "https://github.com/endroid",
+                "type": "github"
+            }
+        ]
+    },
+    {
         "name": "firebase/php-jwt",
         "version": "v5.2.0",
         "version_normalized": "5.2.0.0",
