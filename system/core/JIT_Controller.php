@@ -248,17 +248,21 @@ class JIT_Controller
 
         $this->request->ssl = is_https();
 
-        $this->request->method = $this->input->method();
+        $this->request->method = $this->_detect_method();
+
+        $this->rest->key = null;
 
         if (isset($this->{'_'.$this->request->method.'_args'}) === false) {
             $this->{'_'.$this->request->method.'_args'} = [];
         }
 
+        $this->_parse_query();
+
+        $this->_get_args = array_merge($this->_get_args, $this->uri->ruri_to_assoc());
+
         $this->request->format = $this->_detect_input_format();
 
         $this->request->body = null;
-
-         $this->rest->key = null;
 
         $this->{'_parse_'.$this->request->method}();
 
@@ -269,11 +273,7 @@ class JIT_Controller
         $this->response->format = $this->_detect_output_format();
 
         $this->response->lang = $this->_detect_lang();
-
-        $this->_parse_query();
-
-        $this->_get_args = array_merge($this->_get_args, $this->uri->ruri_to_assoc());
-
+        
         if ($this->request->format && $this->request->body) {
             $this->request->body = Format::factory($this->request->body, $this->request->format)->to_array();
             $this->{'_'.$this->request->method.'_args'} = $this->request->body;
@@ -895,6 +895,29 @@ class JIT_Controller
         }
         $default = \array_diff($default, $method);
         $this->allowed_http_methods = $default;
+    }
+
+    protected function _detect_method()
+    {
+        // Declare a variable to store the method
+        $method = null;
+
+        // Determine whether the 'enable_emulate_request' setting is enabled
+        if ($this->config->item('enable_emulate_request') === true) {
+            $method = $this->input->post('_method');
+            if ($method === null) {
+                $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
+            }
+
+            $method = strtolower($method);
+        }
+
+        if (empty($method)) {
+            // Get the request method as a lowercase string
+            $method = $this->input->method();
+        }
+
+        return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_'.$method) ? $method : 'get';
     }
 
     public function __destruct()
