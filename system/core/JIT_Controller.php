@@ -903,14 +903,14 @@ class JIT_Controller
         $method = null;
 
         // Determine whether the 'enable_emulate_request' setting is enabled
-        if ($this->config->item('enable_emulate_request') === true) {
-            $method = $this->input->post('_method');
-            if ($method === null) {
-                $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
-            }
+        // if ($this->config->item('enable_emulate_request') === true) {
+        //     $method = $this->input->post('_method');
+        //     if ($method === null) {
+        //         $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
+        //     }
 
-            $method = strtolower($method);
-        }
+        //     $method = strtolower($method);
+        // }
 
         if (empty($method)) {
             // Get the request method as a lowercase string
