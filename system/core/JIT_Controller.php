@@ -916,8 +916,9 @@ class JIT_Controller
         //     // Get the request method as a lowercase string
         //     $method = $this->input->method();
         // }
-        $method = $this->input->method();
-        return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_'.$method) ? $method : 'get';
+        // return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_'.$method) ? $method : 'get';
+
+        return $this->input->method();
     }
 
     public function __destruct()
