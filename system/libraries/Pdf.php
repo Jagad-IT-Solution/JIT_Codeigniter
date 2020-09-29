@@ -34,8 +34,8 @@ class CI_Pdf extends Dompdf
 		$this->CI =& get_instance();
 	}
 
-	public function load_pdf($view, $data = []){
-        $html = $this->CI->load->view($view, $data, TRUE);
+	public function load_pdf($view, $data = [], $bool = TRUE){
+        $html = $this->CI->load->view($view, $data, $bool);
         $this->load_html($html);
         $this->render();
         $this->stream($this->filename, ["Attachment" => false]);
