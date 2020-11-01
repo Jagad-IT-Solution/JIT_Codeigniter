@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "7.0",
         "endroid/qr-code": "^3.9",
         "kreait/firebase-php": "5.0",
-        "google/cloud": "^0.142.0"
+        "google/cloud": "^0.142.0",
+        "sentry/sdk": "^3.0"
     }
 }
