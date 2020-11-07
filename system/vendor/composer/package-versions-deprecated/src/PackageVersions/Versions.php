@@ -98,13 +98,13 @@ final class Versions
   'symfony/polyfill-intl-normalizer' => 'v1.18.1@37078a8dd4a2a1e9ab0231af7c6cb671b2ed5a7e',
   'symfony/polyfill-mbstring' => 'v1.18.1@a6977d63bf9a0ad4c65cd352709e230876f9904a',
   'symfony/polyfill-php73' => 'v1.20.0@8ff431c517be11c78c48a39a66d37431e26a6bed',
-  'symfony/polyfill-php80' => 'v1.18.1@d87d5766cbf48d72388a9f6b85f280c8ad51f981',
+  'symfony/polyfill-php80' => 'v1.20.0@e70aa8b064c5b72d3df2abd5ab1e90464ad009de',
   'symfony/polyfill-uuid' => 'v1.20.0@7095799250ff244f3015dc492480175a249e7b55',
   'symfony/property-access' => 'v5.1.7@4c43f7ff784e1e3ee1c96e15f76b342af6617b39',
   'symfony/property-info' => 'v5.1.7@22518930091e0bdb249694efc509e3697f7e325e',
   'symfony/service-contracts' => 'v2.2.0@d15da7ba4957ffb8f1747218be9e1a121fd298a1',
   'symfony/string' => 'v5.1.7@4a9afe9d07bac506f75bcee8ed3ce76da5a9343e',
-  'jagad_it/ci_custome' => 'dev-master@2e272d6d4a8286b6b77d276f8afb71aa09295404',
+  'jagad_it/ci_custome' => 'dev-master@13f6911e1b2a47e14125ae9c8faab01646b0f3a6',
 );
 
     private function __construct()
