@@ -6,11 +6,20 @@
     'aliases' => 
     array (
     ),
-    'reference' => '94ad4ee888c0f230a5fe34beea46a006b22add2f',
+    'reference' => '322b3d64233af7ff899d51f66f2b631287b70a34',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
   array (
+    'athlon1600/youtube-downloader' => 
+    array (
+      'pretty_version' => 'v2.1.1',
+      'version' => '2.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a595645dec6fc2975caaf8f37dafa3ca303ea2c4',
+    ),
     'bacon/bacon-qr-code' => 
     array (
       'pretty_version' => '2.0.2',
@@ -573,7 +582,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '94ad4ee888c0f230a5fe34beea46a006b22add2f',
+      'reference' => '322b3d64233af7ff899d51f66f2b631287b70a34',
     ),
     'jean85/pretty-package-versions' => 
     array (

@@ -33,6 +33,7 @@ final class Versions
      * @internal
      */
     const VERSIONS          = array (
+  'athlon1600/youtube-downloader' => 'v2.1.1@a595645dec6fc2975caaf8f37dafa3ca303ea2c4',
   'bacon/bacon-qr-code' => '2.0.2@add6d9ff97336b62f95a3b94f75cea4e085465b2',
   'brick/math' => '0.9.1@283a40c901101e66de7061bd359252c013dcc43c',
   'clue/stream-filter' => 'v1.5.0@aeb7d8ea49c7963d3b581378955dbf5bc49aa320',
@@ -111,7 +112,7 @@ final class Versions
   'symfony/property-info' => 'v5.1.7@22518930091e0bdb249694efc509e3697f7e325e',
   'symfony/service-contracts' => 'v2.2.0@d15da7ba4957ffb8f1747218be9e1a121fd298a1',
   'symfony/string' => 'v5.1.7@4a9afe9d07bac506f75bcee8ed3ce76da5a9343e',
-  'jagad_it/ci_custome' => 'dev-master@94ad4ee888c0f230a5fe34beea46a006b22add2f',
+  'jagad_it/ci_custome' => 'dev-master@322b3d64233af7ff899d51f66f2b631287b70a34',
 );
 
     private function __construct()

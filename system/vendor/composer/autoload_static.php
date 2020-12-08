@@ -22,8 +22,8 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '27592325262b385204a263c2ab632d6e' => __DIR__ . '/..' . '/kreait/clock/src/Clock.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
@@ -98,6 +98,10 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         array (
             'Zxing\\' => 6,
             'ZipStream\\' => 10,
+        ),
+        'Y' => 
+        array (
+            'YouTube\\' => 8,
         ),
         'S' => 
         array (
@@ -334,6 +338,10 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'YouTube\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/athlon1600/youtube-downloader/src',
         ),
         'Symfony\\Polyfill\\Uuid\\' => 
         array (

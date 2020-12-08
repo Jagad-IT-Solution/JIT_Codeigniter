@@ -15,6 +15,7 @@
         "kreait/firebase-php": "5.0",
         "google/cloud": "^0.142.0",
         "sentry/sdk": "^3.0",
-        "ozdemir/vuefinder-php": "^1.0"
+        "ozdemir/vuefinder-php": "^1.0",
+        "athlon1600/youtube-downloader": "^2.1"
     }
 }
