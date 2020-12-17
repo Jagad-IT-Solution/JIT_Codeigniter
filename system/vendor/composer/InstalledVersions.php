@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '322b3d64233af7ff899d51f66f2b631287b70a34',
+    'reference' => 'c8c14a52227ae57b2854a6f8935e4f378e6bca19',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -595,7 +595,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '322b3d64233af7ff899d51f66f2b631287b70a34',
+      'reference' => 'c8c14a52227ae57b2854a6f8935e4f378e6bca19',
     ),
     'jean85/pretty-package-versions' => 
     array (
@@ -651,24 +651,6 @@ private static $installed = array (
       ),
       'reference' => 'c1123697f6a2ec29162b82f170dd4a491f524773',
     ),
-    'league/flysystem' => 
-    array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
-    ),
-    'league/mime-type-detection' => 
-    array (
-      'pretty_version' => '1.5.1',
-      'version' => '1.5.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '353f66d7555d8a90781f6f5e7091932f9a4250aa',
-    ),
     'maennchen/zipstream-php' => 
     array (
       'pretty_version' => '2.1.0',
@@ -723,21 +705,30 @@ private static $installed = array (
       ),
       'reference' => '5f36467c7a87e20fbdc51e524fd8f9d1de80187c',
     ),
+    'norkunas/onesignal-php-api' => 
+    array (
+      'pretty_version' => 'v1.14.1',
+      'version' => '1.14.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '695b53f433dcc35f6cce2fd692e9d0ffa2ca4f23',
+    ),
+    'nyholm/psr7' => 
+    array (
+      'pretty_version' => '1.3.2',
+      'version' => '1.3.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a272953743c454ac4af9626634daaf5ab3ce1173',
+    ),
     'ocramius/package-versions' => 
     array (
       'replaced' => 
       array (
         0 => '1.11.99',
       ),
-    ),
-    'ozdemir/vuefinder-php' => 
-    array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '52289a834957f59dc32a32d0e6b63f6b2c04299d',
     ),
     'php-http/async-client-implementation' => 
     array (
@@ -871,6 +862,7 @@ private static $installed = array (
       'provided' => 
       array (
         0 => '^1.0',
+        1 => '1.0',
       ),
     ),
     'psr/http-message' => 
@@ -1004,12 +996,12 @@ private static $installed = array (
     ),
     'symfony/http-client' => 
     array (
-      'pretty_version' => 'v5.1.8',
-      'version' => '5.1.8.0',
+      'pretty_version' => 'v5.2.0',
+      'version' => '5.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '97a6a1f9f5bb3a6094833107b58a72bc9a9165cc',
+      'reference' => '5b9fc5d85a6cec73832ff170ccd468d97dd082d9',
     ),
     'symfony/http-client-contracts' => 
     array (
@@ -1026,24 +1018,6 @@ private static $installed = array (
       array (
         0 => '1.1',
       ),
-    ),
-    'symfony/http-foundation' => 
-    array (
-      'pretty_version' => 'v4.4.16',
-      'version' => '4.4.16.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '827a00811ef699e809a201ceafac0b2b246bf38a',
-    ),
-    'symfony/mime' => 
-    array (
-      'pretty_version' => 'v5.1.8',
-      'version' => '5.1.8.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'f5485a92c24d4bcfc2f3fc648744fb398482ff1b',
     ),
     'symfony/options-resolver' => 
     array (
@@ -1072,15 +1046,6 @@ private static $installed = array (
       ),
       'reference' => 'b740103edbdcc39602239ee8860f0f45a8eb9aa5',
     ),
-    'symfony/polyfill-intl-idn' => 
-    array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3b75acd829741c768bc8b1f84eb33265e7cc5117',
-    ),
     'symfony/polyfill-intl-normalizer' => 
     array (
       'pretty_version' => 'v1.18.1',
@@ -1098,15 +1063,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a6977d63bf9a0ad4c65cd352709e230876f9904a',
-    ),
-    'symfony/polyfill-php72' => 
-    array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'cede45fcdfabdd6043b3592e83678e42ec69e930',
     ),
     'symfony/polyfill-php73' => 
     array (
