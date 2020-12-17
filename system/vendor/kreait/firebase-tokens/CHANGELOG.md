@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.14.0 - 2020-12-09
+
+- Drop the `V3` suffix from handlers using `lcobucci/jwt`
+- Limit support to PHP 8.0.*
+
+## 1.13.0 - 2020-11-29
+
+- Added support for PHP 8.0
+
+## 1.12.0 - 2020-11-27
+
+- Added Tenant Awareness
+- Fixed usage of deprecated functionality from `lcobucci/jwt`
+
 ## 1.11.0 - 2020-10-04
 
 - Updated dev-dependency on `symfony/cache` to address [CVE-2019-10912](https://github.com/advisories/GHSA-w2fr-65vp-mxw3)

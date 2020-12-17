@@ -57,7 +57,9 @@ use LogicException;
 trait GapicClientTrait
 {
     use ArrayTrait;
-    use ValidationTrait;
+    use ValidationTrait {
+        ValidationTrait::validate as traitValidate;
+    }
     use GrpcSupportTrait;
 
     /** @var TransportInterface */
@@ -298,7 +300,7 @@ trait GapicClientTrait
             'credentialsConfig',
             'transportConfig',
         ]);
-        $this->validate($options, [
+        $this->traitValidate($options, [
             'credentials',
             'transport',
             'gapicVersion',
@@ -379,6 +381,14 @@ trait GapicClientTrait
                 "'transport' must be a string, instead got:" .
                 print_r($transport, true)
             );
+        }
+        $supportedTransports = self::supportedTransports();
+        if (!in_array($transport, $supportedTransports)) {
+            throw new ValidationException(sprintf(
+                'Unexpected transport option "%s". Supported transports: %s',
+                $transport,
+                implode(', ', $supportedTransports)
+            ));
         }
         $configForSpecifiedTransport = isset($transportConfig[$transport])
             ? $transportConfig[$transport]
@@ -590,7 +600,9 @@ trait GapicClientTrait
         );
 
         $this->modifyUnaryCallable($callStack);
-        return $callStack($call, $optionalArgs);
+        return $callStack($call, $optionalArgs + array_filter([
+            'audience' => self::getDefaultAudience()
+        ]));
     }
 
     /**
@@ -626,7 +638,9 @@ trait GapicClientTrait
         );
 
         $this->modifyUnaryCallable($callStack);
-        return $callStack($call, $optionalArgs)->wait();
+        return $callStack($call, $optionalArgs + array_filter([
+            'audience' => self::getDefaultAudience()
+        ]))->wait();
     }
 
     /**
@@ -653,6 +667,15 @@ trait GapicClientTrait
             return null;
         }
         return 'https://' . self::SERVICE_ADDRESS . '/';
+    }
+
+    /**
+     * This defaults to all three transports, which One-Platform supports.
+     * Discovery clients should define this function and only return ['rest'].
+     */
+    private static function supportedTransports()
+    {
+        return ['grpc', 'grpc-fallback', 'rest'];
     }
 
     // Gapic Client Extension Points
