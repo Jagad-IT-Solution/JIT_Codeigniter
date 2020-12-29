@@ -149,6 +149,7 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         ),
         'L' => 
         array (
+            'Longman\\TelegramBot\\' => 20,
             'Lcobucci\\JWT\\' => 13,
         ),
         'K' => 
@@ -444,6 +445,10 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Longman\\TelegramBot\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/longman/telegram-bot/src',
         ),
         'Lcobucci\\JWT\\' => 
         array (

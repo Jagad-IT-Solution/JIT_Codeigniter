@@ -1,15 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
-
-
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -29,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a55ff8166a4811168dbf4d14f208e1a6b98158e3',
+    'reference' => '300d61e489159601afda3f35c6fa662757086428',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -578,7 +568,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a55ff8166a4811168dbf4d14f208e1a6b98158e3',
+      'reference' => '300d61e489159601afda3f35c6fa662757086428',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -624,6 +614,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '17cb82dd625ccb17c74bf8f38563d3b260306483',
+    ),
+    'longman/telegram-bot' => 
+    array (
+      'pretty_version' => '0.70.1',
+      'version' => '0.70.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2093cffa2a8e0497d12183178e17cadcc1d0f6d5',
     ),
     'maennchen/zipstream-php' => 
     array (
@@ -892,12 +891,12 @@ private static $installed = array (
     ),
     'symfony/http-client' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5b9fc5d85a6cec73832ff170ccd468d97dd082d9',
+      'reference' => 'a77cbec69ea90dea509beef29b79748c0df33a83',
     ),
     'symfony/http-client-contracts' => 
     array (
@@ -917,8 +916,8 @@ private static $installed = array (
     ),
     'symfony/options-resolver' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
       'aliases' => 
       array (
       ),
@@ -980,21 +979,21 @@ private static $installed = array (
     ),
     'symfony/property-access' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5cf86761edaf58376845a96ea6c0d28d475d5ad3',
+      'reference' => '243dcdda2f276cb31efa31a015d0fdb5076931ce',
     ),
     'symfony/property-info' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '69ca096d096a0a58457818a5a2d1ce51f5f14909',
+      'reference' => 'f65694a05eb7742c5f2951f20676de367ffaaaea',
     ),
     'symfony/service-contracts' => 
     array (
@@ -1007,12 +1006,12 @@ private static $installed = array (
     ),
     'symfony/string' => 
     array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
+      'pretty_version' => 'v5.2.1',
+      'version' => '5.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '40e975edadd4e32cd16f3753b3bad65d9ac48242',
+      'reference' => '5bd67751d2e3f7d6f770c9154b8fbcb2aa05f7ed',
     ),
   ),
 );
