@@ -1,7 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
+
 use \Firebase\JWT\JWT;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\Debug\DebugClassLoader;
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
+
+Debug::enable();
+ErrorHandler::register();
+DebugClassLoader::enable();
+ExceptionHandler::register();
+
+
+
 require 'Format.php';
 class JIT_Controller
 {
@@ -19,35 +32,35 @@ class JIT_Controller
      */
     public  $load;
     // public  $allowed_http_methods = ['GET', 'DELETE', 'POST', 'PUT', 'OPTIONS', 'PATCH', 'HEAD'];
-    public  $allowed_http_methods = ['GET','POST'];
+    public  $allowed_http_methods = ['GET', 'POST'];
 
     /**
-    * Contains details about the response
-    * Fields: format, lang
-    * Note: This is a dynamic object (stdClass).
-    *
-    * @var object
-    */
+     * Contains details about the response
+     * Fields: format, lang
+     * Note: This is a dynamic object (stdClass).
+     *
+     * @var object
+     */
     protected   $rest_format = null,
-                $methods = [],
-                $request = null,
-                $response = null,
-                $rest = null;
+        $methods = [],
+        $request = null,
+        $response = null,
+        $rest = null;
 
     /**
-    * The arguments from GET, POST, PUT, DELETE, PATCH, HEAD and OPTIONS request methods combined.
-    *
-    * @var array
-    */
+     * The arguments from GET, POST, PUT, DELETE, PATCH, HEAD and OPTIONS request methods combined.
+     *
+     * @var array
+     */
     protected   $_get_args = [],
-                $_post_args = [],
-                $_put_args = [],
-                $_delete_args = [],
-                $_patch_args = [],
-                $_head_args = [],
-                $_options_args = [],
-                $_query_args = [],
-                $_args = [];
+        $_post_args = [],
+        $_put_args = [],
+        $_delete_args = [],
+        $_patch_args = [],
+        $_head_args = [],
+        $_options_args = [],
+        $_query_args = [],
+        $_args = [];
 
     /**
      * The insert_id of the log entry (if we have one).
@@ -75,15 +88,9 @@ class JIT_Controller
     /**
      * The start of the response time from the server.
      *
-     * @var number
+     *
      */
     protected $_start_rtime;
-
-    /**
-     * The end of the response time from the server.
-     *
-     * @var number
-     */
     protected $_end_rtime;
 
     /**
@@ -137,21 +144,21 @@ class JIT_Controller
 
     private $is_valid_request = true;
 
-    public $http_status; 
+    public $http_status;
 
     protected   $HTTP_OK = 200,
-                $HTTP_CREATED = 201,
-                $HTTP_NOT_MODIFIED = 304,
-                $HTTP_BAD_REQUEST = 400,
-                $HTTP_UNAUTHORIZED = 401,
-                $HTTP_FORBIDDEN = 403,
-                $HTTP_NOT_FOUND = 404,
-                $HTTP_NOT_ACCEPTABLE = 406,
-                $HTTP_INTERNAL_ERROR = 500;
+        $HTTP_CREATED = 201,
+        $HTTP_NOT_MODIFIED = 304,
+        $HTTP_BAD_REQUEST = 400,
+        $HTTP_UNAUTHORIZED = 401,
+        $HTTP_FORBIDDEN = 403,
+        $HTTP_NOT_FOUND = 404,
+        $HTTP_NOT_ACCEPTABLE = 406,
+        $HTTP_INTERNAL_ERROR = 500;
 
     public $HTTP_RESPONSE,
-            $message,
-            $status = false;
+        $message,
+        $status = false;
     /**
      * Extend this function to apply additional checking early on in the process.
      *
@@ -164,36 +171,36 @@ class JIT_Controller
     public $key_file_name;
 
     /**
-    * Token Request Header Name
-    */
+     * Token Request Header Name
+     */
     protected $token_header;
     protected $token_algorithm;
-   /**
-    * Token Expire Time
-    */
-    protected $token_expired; 
+    /**
+     * Token Expire Time
+     */
+    protected $token_expired;
 
     protected function early_checks()
     {
         if (!isset($this->check_api_key)) {
-           $this->check_api_key = $this->config->item('check_api_key');
-           $this->api_key_variable = $this->config->item('api_key_name');
+            $this->check_api_key = $this->config->item('check_api_key');
+            $this->api_key_variable = $this->config->item('api_key_name');
         }
 
         if (!isset($this->key_file_name)) {
-           $this->key_file_name = $this->config->item('key_file_name');
+            $this->key_file_name = $this->config->item('key_file_name');
         }
-        
+
         $this->create_key();
     }
 
     public function __construct()
     {
-        self::$instance =& $this;
-        foreach (is_loaded() as $var => $class){
-            $this->$var =& load_class($class);
+        self::$instance = &$this;
+        foreach (is_loaded() as $var => $class) {
+            $this->$var = &load_class($class);
         }
-        $this->load =& load_class('Loader', 'core');
+        $this->load = &load_class('Loader', 'core');
         $this->load->initialize();
         $this->config->load('rest');
 
@@ -236,7 +243,7 @@ class JIT_Controller
         if ($language === null) {
             $language = 'english';
         }
-        $this->lang->load('rest_controller', $language, false, true, __DIR__.'/../');
+        $this->lang->load('rest_controller', $language, false, true, __DIR__ . '/../');
 
         $this->request = new stdClass();
         $this->response = new stdClass();
@@ -252,8 +259,8 @@ class JIT_Controller
 
         $this->rest->key = null;
 
-        if (isset($this->{'_'.$this->request->method.'_args'}) === false) {
-            $this->{'_'.$this->request->method.'_args'} = [];
+        if (isset($this->{'_' . $this->request->method . '_args'}) === false) {
+            $this->{'_' . $this->request->method . '_args'} = [];
         }
 
         $this->_parse_query();
@@ -264,19 +271,19 @@ class JIT_Controller
 
         $this->request->body = null;
 
-        $this->{'_parse_'.$this->request->method}();
+        $this->{'_parse_' . $this->request->method}();
 
-        if ($this->{'_'.$this->request->method.'_args'} === null) {
-            $this->{'_'.$this->request->method.'_args'} = [];
+        if ($this->{'_' . $this->request->method . '_args'} === null) {
+            $this->{'_' . $this->request->method . '_args'} = [];
         }
 
         $this->response->format = $this->_detect_output_format();
 
         $this->response->lang = $this->_detect_lang();
-        
+
         if ($this->request->format && $this->request->body) {
             $this->request->body = Format::factory($this->request->body, $this->request->format)->to_array();
-            $this->{'_'.$this->request->method.'_args'} = $this->request->body;
+            $this->{'_' . $this->request->method . '_args'} = $this->request->body;
         }
 
         $this->_head_args = $this->input->request_headers();
@@ -289,7 +296,7 @@ class JIT_Controller
             $this->_put_args,
             $this->_post_args,
             $this->_delete_args,
-            $this->{'_'.$this->request->method.'_args'}
+            $this->{'_' . $this->request->method . '_args'}
         );
 
         $this->early_checks();
@@ -300,30 +307,31 @@ class JIT_Controller
         return self::$instance;
     }
 
-    function pass_hash($password) {
+    function pass_hash($password)
+    {
         $pass    = md5(sha1(md5($password)));
         $options = ['cost' => 10];
         return password_hash($pass, PASSWORD_DEFAULT, $options);
     }
 
-    function pass_verify($password, $hash) {
+    function pass_verify($password, $hash)
+    {
         $pass = md5(sha1(md5($password)));
         return password_verify($pass, $hash);
     }
 
     public function creatToken($data = null)
     {
-        if ($data AND is_array($data)){
+        if ($data and is_array($data)) {
             $data['iss'] = 'JAGAD IT SOLUTIONS';
             $data['aud'] = 'JIT';
             $data['iat'] =  time();
             if ($this->token_expired != FALSE) {
-                 $data['exp'] =  time() + $this->token_expired;
+                $data['exp'] =  time() + $this->token_expired;
             }
             try {
                 return JWT::encode($data, $this->api_key, $this->token_algorithm);
-            }
-            catch(Exception $e) {
+            } catch (Exception $e) {
                 return ['status' => FALSE, 'message' => $e->getMessage()];
             }
         } else {
@@ -335,8 +343,7 @@ class JIT_Controller
     {
         try {
             return JWT::decode($token, $this->api_key, array($this->token_algorithm));
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return ['status' => FALSE, 'message' => $e->getMessage()];
         }
     }
@@ -347,34 +354,30 @@ class JIT_Controller
          * Request All Headers
          */
         $headers = $this->input->request_headers();
-        
+
         /**
          * Authorization Header Exists
          */
         $token_data = $this->tokenIsExist($headers);
-        if($token_data['status'] === TRUE)
-        {
-            try
-            {
+        if ($token_data['status'] === TRUE) {
+            try {
                 /**
                  * Token Decode
                  */
                 try {
                     $token_decode = JWT::decode($token_data['token'], $this->api_key, array($this->token_algorithm));
-                }
-                catch(Exception $e) {
-                   $this->response(['status' => FALSE, 'message' => $e->getMessage()],500);
+                } catch (Exception $e) {
+                    $this->response(['status' => FALSE, 'message' => $e->getMessage()], 500);
                 }
 
-                if(!empty($token_decode) AND is_object($token_decode)){
+                if (!empty($token_decode) and is_object($token_decode)) {
                     // Check Token API Time [exp]
                     if ($this->token_expired != FALSE) {
-                        if (empty($token_decode->exp OR !is_numeric($token_decode->exp))) {
+                        if (empty($token_decode->exp or !is_numeric($token_decode->exp))) {
 
-                            $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'],403);
+                            $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'], 403);
                         }
-                    }
-                    else{
+                    } else {
                         /**
                          * Check Token Time Valid 
                          */
@@ -389,25 +392,22 @@ class JIT_Controller
                         //     return ['status' => TRUE, 'data' => $token_decode];
                         // }
                     }
-                    
-                }else{
-                    $this->response(['status' => FALSE, 'message' => 'Forbidden'],403);
+                } else {
+                    $this->response(['status' => FALSE, 'message' => 'Forbidden'], 403);
                 }
+            } catch (Exception $e) {
+                $this->response(['status' => FALSE, 'message' => $e->getMessage()], 500);
             }
-            catch(Exception $e) {
-                $this->response(['status' => FALSE, 'message' => $e->getMessage()],500);
-            }
-        }else
-        {
+        } else {
             // Authorization Header Not Found!
-            $this->response(['status' => FALSE, 'message' => $token_data['message'] ],403);
+            $this->response(['status' => FALSE, 'message' => $token_data['message']], 403);
         }
     }
 
 
     public function tokenIsExist($headers)
     {
-        if(!empty($headers) AND is_array($headers)) {
+        if (!empty($headers) and is_array($headers)) {
             foreach ($headers as $header_name => $header_value) {
                 if (strtolower(trim($header_name)) == strtolower(trim($this->token_header)))
                     return ['status' => TRUE, 'token' => str_replace('Bearer ', '', $header_value)];
@@ -418,22 +418,22 @@ class JIT_Controller
 
     public function create_key()
     {
-        $files = '.'.$this->key_file_name;
+        $files = '.' . $this->key_file_name;
         if (!file_exists($files)) {
             file_put_contents($files, password_hash(rand(), PASSWORD_DEFAULT));
         }
-        $this->api_key =  file_get_contents('./.'.$this->key_file_name);
+        $this->api_key =  file_get_contents('./.' . $this->key_file_name);
     }
 
     public function _remap($method, $params = [])
     {
-        $method = preg_replace('/^(.*)\.(?:'.implode('|', array_keys($this->_supported_formats)).')$/', '$1', $method);
-        if(!in_array(strtoupper($this->request->method),$this->allowed_http_methods)){
+        $method = preg_replace('/^(.*)\.(?:' . implode('|', array_keys($this->_supported_formats)) . ')$/', '$1', $method);
+        if (!in_array(strtoupper($this->request->method), $this->allowed_http_methods)) {
             $this->response([
                 'status'    => false,
                 'method'    => strtoupper($this->request->method),
-                'message'   => 'Sorry the '.strtoupper($this->request->method).' method is not allowed',
-            ],$this->http_status['METHOD_NOT_ALLOWED']);
+                'message'   => 'Sorry the ' . strtoupper($this->request->method) . ' method is not allowed',
+            ], $this->http_status['METHOD_NOT_ALLOWED']);
         }
 
         if ($this->check_api_key && $this->auth_override !== true) {
@@ -444,8 +444,10 @@ class JIT_Controller
 
         if ($this->check_api_key && $use_key && $this->_allow === false) {
 
-            if ($this->request->method == 'options') { exit; }
-            
+            if ($this->request->method == 'options') {
+                exit;
+            }
+
             $this->response([
                 $this->config->item('rest_status_field_name')  => false,
                 $this->config->item('rest_message_field_name') => sprintf($this->lang->line('text_rest_invalid_api_key'), $this->rest->key)
@@ -469,7 +471,7 @@ class JIT_Controller
 
     protected function _detect_api_key()
     {
-        $key_name = 'HTTP_'.strtoupper(str_replace('-', '_', $this->api_key_variable));
+        $key_name = 'HTTP_' . strtoupper(str_replace('-', '_', $this->api_key_variable));
         if (($this->rest->key = isset($this->_args[$this->api_key_variable]) ? $this->_args[$this->api_key_variable] : $this->input->server($key_name))) {
             return $this->api_key === $this->rest->key;
         }
@@ -629,7 +631,7 @@ class JIT_Controller
     {
         if (!$this->load->config($config_file, false)) {
             $config = [];
-            include __DIR__.'/'.$config_file.'.php';
+            include __DIR__ . '/' . $config_file . '.php';
             foreach ($config as $key => $value) {
                 $this->config->set_item($key, $value);
             }
@@ -695,14 +697,14 @@ class JIT_Controller
             // If data is not NULL and a HTTP status code provided, then continue
             elseif ($data !== null) {
                 // If the format method exists, call and return the output in that format
-                if (method_exists(Format::class, 'to_'.$this->response->format)) {
+                if (method_exists(Format::class, 'to_' . $this->response->format)) {
                     // CORB protection
                     // First, get the output content.
-                    $output = Format::factory($data)->{'to_'.$this->response->format}();
+                    $output = Format::factory($data)->{'to_' . $this->response->format}();
 
                     // Set the format header
                     // Then, check if the client asked for a callback, and if the output contains this callback :
-                    if (isset($this->_get_args['callback']) && $this->response->format == 'json' && preg_match('/^'.$this->_get_args['callback'].'/', $output)) {
+                    if (isset($this->_get_args['callback']) && $this->response->format == 'json' && preg_match('/^' . $this->_get_args['callback'] . '/', $output)) {
                         $this->output->set_content_type($this->_supported_formats['jsonp'], strtolower($this->config->item('charset')));
                     } else {
                         $this->output->set_content_type($this->_supported_formats[$this->response->format], strtolower($this->config->item('charset')));
@@ -756,7 +758,7 @@ class JIT_Controller
                 }
             }
             ob_end_flush();
-        // Otherwise dump the output automatically
+            // Otherwise dump the output automatically
         } else {
             echo json_encode($data);
         }
@@ -771,9 +773,12 @@ class JIT_Controller
         $payload['response_code'] = $http_code;
 
         return $this->rest->db->update(
-            $this->config->item('rest_logs_table'), $payload, [
-            'id' => $this->_insert_id,
-        ]);
+            $this->config->item('rest_logs_table'),
+            $payload,
+            [
+                'id' => $this->_insert_id,
+            ]
+        );
     }
 
     protected function _log_request($authorized = false)
@@ -781,15 +786,17 @@ class JIT_Controller
         // Insert the request into the log table
         $is_inserted = $this->rest->db
             ->insert(
-                $this->config->item('rest_logs_table'), [
-                'uri'        => $this->uri->uri_string(),
-                'method'     => $this->request->method,
-                'params'     => $this->_args ? ($this->config->item('rest_logs_json_params') === true ? json_encode($this->_args) : serialize($this->_args)) : null,
-                'api_key'    => isset($this->rest->key) ? $this->rest->key : '',
-                'ip_address' => $this->input->ip_address(),
-                'time'       => time(),
-                'authorized' => $authorized,
-            ]);
+                $this->config->item('rest_logs_table'),
+                [
+                    'uri'        => $this->uri->uri_string(),
+                    'method'     => $this->request->method,
+                    'params'     => $this->_args ? ($this->config->item('rest_logs_json_params') === true ? json_encode($this->_args) : serialize($this->_args)) : null,
+                    'api_key'    => isset($this->rest->key) ? $this->rest->key : '',
+                    'ip_address' => $this->input->ip_address(),
+                    'time'       => time(),
+                    'authorized' => $authorized,
+                ]
+            );
 
         // Get the last insert id to update at a later stage of the request
         $this->_insert_id = $this->rest->db->insert_id();
@@ -830,7 +837,7 @@ class JIT_Controller
     protected function _detect_output_format()
     {
         // Concatenate formats to a regex pattern e.g. \.(csv|json|xml)
-        $pattern = '/\.('.implode('|', array_keys($this->_supported_formats)).')($|\/)/';
+        $pattern = '/\.(' . implode('|', array_keys($this->_supported_formats)) . ')($|\/)/';
         $matches = [];
 
         // Check if a file extension is used e.g. http://example.com/api/index.json?param1=param2
@@ -880,9 +887,9 @@ class JIT_Controller
     {
         $default = $this->allowed_http_methods;
         if (is_array($method)) {
-            $default = array_merge($default,$method);
-        }else{
-            array_push($default,$method);
+            $default = array_merge($default, $method);
+        } else {
+            array_push($default, $method);
         }
         $this->allowed_http_methods = $default;
     }
@@ -919,6 +926,23 @@ class JIT_Controller
         // return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_'.$method) ? $method : 'get';
 
         return $this->input->method();
+    }
+
+    protected function _log_access_time()
+    {
+        if ($this->_insert_id == '') {
+            return false;
+        }
+
+        $payload['rtime'] = $this->_end_rtime - $this->_start_rtime;
+
+        return $this->rest->db->update(
+            $this->config->item('rest_logs_table'),
+            $payload,
+            [
+                'id' => $this->_insert_id,
+            ]
+        );
     }
 
     public function __destruct()
