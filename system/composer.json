@@ -30,5 +30,8 @@
         "norkunas/onesignal-php-api": "2.2.0",
         "longman/telegram-bot": "^0.70.1",
         "symfony/debug": "^4.4"
+    },
+    "require-dev": {
+        "kint-php/kint": "^3.3"
     }
 }

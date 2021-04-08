@@ -85,6 +85,7 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'eef6fa3879d3efa347cd24d5eb348f85' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/divideinto.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -160,6 +161,7 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
             'Kreait\\Firebase\\JWT\\' => 20,
             'Kreait\\Firebase\\' => 16,
             'Kreait\\Clock\\' => 13,
+            'Kint\\' => 5,
         ),
         'J' => 
         array (
@@ -476,6 +478,10 @@ class ComposerStaticInitf989d4f204f373ad89b940783a95d528
         'Kreait\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/kreait/clock/src/Clock',
+        ),
+        'Kint\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kint-php/kint/src',
         ),
         'JmesPath\\' => 
         array (

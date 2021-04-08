@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '1e0e0d011837ac7440b1d888a9414b2d185d92ce',
+    'reference' => '1a0aa2886a329e99872942ca875005c115f8c928',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -564,7 +564,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '1e0e0d011837ac7440b1d888a9414b2d185d92ce',
+      'reference' => '1a0aa2886a329e99872942ca875005c115f8c928',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -574,6 +574,15 @@
       array (
       ),
       'reference' => '07fceefb79d895e858e52921afb9c1433d2f3d5e',
+    ),
+    'kint-php/kint' => 
+    array (
+      'pretty_version' => '3.3',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '335ac1bcaf04d87df70d8aa51e8887ba2c6d203b',
     ),
     'kreait/clock' => 
     array (
