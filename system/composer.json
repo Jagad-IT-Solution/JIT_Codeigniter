@@ -2,7 +2,7 @@
     "name": "jagad_it/ci_custome",
     "type": "project",
     "license": "GPL",
-	"description":"Codeigniter custome core",
+    "description": "Codeigniter custome core",
     "authors": [
         {
             "name": "Jagad IT Solutions",
