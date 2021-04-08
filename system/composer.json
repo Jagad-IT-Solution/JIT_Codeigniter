@@ -1,5 +1,6 @@
 {
     "name": "jagad_it/ci_custome",
+    "description": "CodeIgniter framework custome core system",
     "type": "project",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
