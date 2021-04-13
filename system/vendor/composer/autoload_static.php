@@ -1006,6 +1006,7 @@ class ComposerStaticInite4890ededb63af55650ebddd66ea10e6
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'yidas\\Model' => __DIR__ . '/..' . '/yidas/codeigniter-model/src/Model.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

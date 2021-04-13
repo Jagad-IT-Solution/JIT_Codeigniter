@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd48e9128cbbdd738686ca477854322b59a806a95',
+    'reference' => 'db5a8553ca4fb126d6803084ef97b6149b2603ce',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -573,7 +573,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd48e9128cbbdd738686ca477854322b59a806a95',
+      'reference' => 'db5a8553ca4fb126d6803084ef97b6149b2603ce',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -969,6 +969,15 @@
       array (
       ),
       'reference' => 'ad0bd91bce2054103f5eaa18ebeba8d3bc2a0572',
+    ),
+    'yidas/codeigniter-model' => 
+    array (
+      'pretty_version' => '2.19.2',
+      'version' => '2.19.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5cfce5821ab4261b5d8ea36894a14f4253acf68f',
     ),
   ),
 );

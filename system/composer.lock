@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db3bfd1c5fe30c9430254b48ce20775a",
+    "content-hash": "e9a2720f4993fb5760941407618b8a7b",
     "packages": [
         {
             "name": "athlon1600/youtube-downloader",
@@ -4225,6 +4225,47 @@
                 }
             ],
             "time": "2021-03-17T17:12:15+00:00"
+        },
+        {
+            "name": "yidas/codeigniter-model",
+            "version": "2.19.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidas/codeigniter-model.git",
+                "reference": "5cfce5821ab4261b5d8ea36894a14f4253acf68f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidas/codeigniter-model/zipball/5cfce5821ab4261b5d8ea36894a14f4253acf68f",
+                "reference": "5cfce5821ab4261b5d8ea36894a14f4253acf68f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "CodeIgniter 3 ORM Base Model pattern with My_model example",
+            "homepage": "https://github.com/yidas/codeigniter-model",
+            "keywords": [
+                "MY_Model",
+                "base model",
+                "codeigniter",
+                "model"
+            ],
+            "support": {
+                "issues": "https://github.com/yidas/codeigniter-model/issues",
+                "source": "https://github.com/yidas/codeigniter-model"
+            },
+            "time": "2020-02-25T02:42:20+00:00"
         }
     ],
     "packages-dev": [
