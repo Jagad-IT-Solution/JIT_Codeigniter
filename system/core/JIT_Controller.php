@@ -439,8 +439,14 @@ class JIT_Controller
         }
 
         $use_key = !(isset($this->methods[$method]['key']) && $this->methods[$method]['key'] === false);
+        $log_method = !(isset($this->methods[$method]['log']) && $this->methods[$method]['log'] === false);
+
 
         if ($this->check_api_key && $use_key && $this->_allow === false) {
+            if ($this->config->item('rest_enable_logging') && $log_method) {
+                $this->_log_request();
+            }
+
             if ($this->request->method == 'options') {
                 exit;
             }
