@@ -310,15 +310,13 @@ class JIT_Controller
 
     function pass_hash($password)
     {
-        $pass    = md5(sha1(md5($password)));
         $options = ['cost' => 10];
-        return password_hash($pass, PASSWORD_DEFAULT, $options);
+        return password_hash($password, PASSWORD_DEFAULT, $options);
     }
 
     function pass_verify($password, $hash)
     {
-        $pass = md5(sha1(md5($password)));
-        return password_verify($pass, $hash);
+        return password_verify($password, $hash);
     }
 
     public function creatToken($data = null)
