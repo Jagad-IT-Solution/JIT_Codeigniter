@@ -1732,8 +1732,10 @@ abstract class CI_DB_driver {
 	 * @param	bool	whether to localize the message
 	 * @return	string	sends the application/views/errors/error_db.php template
 	 */
+
 	public function display_error($error = '', $swap = '', $native = FALSE)
 	{
+		$CI = &get_instance();
 		$LANG =& load_class('Lang', 'core');
 		$LANG->load('db');
 
@@ -1772,8 +1774,14 @@ abstract class CI_DB_driver {
 			}
 		}
 
-		$error =& load_class('Exceptions', 'core');
-		echo $error->show_error($heading, $message, 'error_db');
+		// $error =& load_class('Exceptions', 'core');
+		// echo $error->show_error($heading, $message, 'error_db');
+		
+    	$CI->response([
+    		'error' => $heading,
+    		'message' => $message,
+    	], 500);
+    	
 		exit(8); // EXIT_DATABASE
 	}
 
