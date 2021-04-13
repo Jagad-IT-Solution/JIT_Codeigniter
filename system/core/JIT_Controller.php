@@ -33,8 +33,33 @@ class JIT_Controller
      */
     protected $rest_format = null;
     protected $methods = [];
+   
+    
+    /**
+    * Contains details about the request
+    * Fields: body, format, method, ssl
+    * Note: This is a dynamic object (stdClass).
+    *
+    * @var object
+    */
     protected $request = null;
+
+    /**
+     * Contains details about the response
+     * Fields: format, lang
+     * Note: This is a dynamic object (stdClass).
+     *
+     * @var object
+     */
     protected $response = null;
+
+    /**
+     * Contains details about the REST API
+     * Fields: db, ignore_limits, key, level, user_id
+     * Note: This is a dynamic object (stdClass).
+     *
+     * @var object
+     */
     protected $rest = null;
 
     /**
@@ -173,6 +198,8 @@ class JIT_Controller
     protected $privateKey;
     protected $publicKey;
 
+    protected $CI;
+
     protected function early_checks()
     {
         if (!isset($this->check_api_key)) {
@@ -193,6 +220,7 @@ class JIT_Controller
         foreach (is_loaded() as $var => $class) {
             $this->$var = &load_class($class);
         }
+
         $this->load = &load_class('Loader', 'core');
         $this->load->initialize();
         $this->config->load('rest');
@@ -243,6 +271,7 @@ class JIT_Controller
         }
         $this->lang->load('rest_controller', $language, false, true, __DIR__ . '/../');
 
+        // Initialise the response, request and rest objects
         $this->request = new stdClass();
         $this->response = new stdClass();
         $this->rest = new stdClass();
@@ -256,6 +285,13 @@ class JIT_Controller
         $this->request->method = $this->input->method();
 
         $this->rest->key = null;
+
+        if ($this->config->item('rest_database_group') && ($this->config->item('rest_enable_keys') || $this->config->item('rest_enable_logging'))) {
+            $this->rest->db = $this->load->database($this->config->item('rest_database_group'), true);
+        } elseif (property_exists($this, 'db')) {
+            $this->rest->db = $this->db;
+        }
+
 
         if (isset($this->{'_' . $this->request->method . '_args'}) === false) {
             $this->{'_' . $this->request->method . '_args'} = [];
@@ -443,14 +479,9 @@ class JIT_Controller
 
 
         if ($this->check_api_key && $use_key && $this->_allow === false) {
-            if ($this->config->item('rest_enable_logging') && $log_method) {
-                $this->_log_request();
-            }
-
             if ($this->request->method == 'options') {
                 exit;
             }
-
             $this->response([
                 $this->config->item('rest_status_field_name')  => false,
                 $this->config->item('rest_message_field_name') => sprintf($this->lang->line('text_rest_invalid_api_key'), $this->rest->key)
