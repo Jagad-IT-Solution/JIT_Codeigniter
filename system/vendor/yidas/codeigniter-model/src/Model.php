@@ -1,346 +1,205 @@
 <?php
-
-namespace yidas;
-
-use Exception;
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package CodeIgniter
+ * @author  EllisLab Dev Team
+ * @copyright   Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright   Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license https://opensource.org/licenses/MIT MIT License
+ * @link    https://codeigniter.com
+ * @since   Version 1.0.0
+ * @filesource
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Base Model
+ * Model Class
  *
- * @author   Nick Tsai <myintaer@gmail.com>
- * @version  2.19.2
- * @see      https://github.com/yidas/codeigniter-model
+ * @package     CodeIgniter
+ * @subpackage  Libraries
+ * @category    Libraries
+ * @author      EllisLab Dev Team
+ * @link        https://codeigniter.com/user_guide/libraries/config.html
  */
-class Model extends \CI_Model implements \ArrayAccess
+
+class CI_Model
 {
-    /**
-     * Database Configuration for read-write master
-     * 
-     * @var object|string|array CI DB ($this->db as default), CI specific group name or CI database config array
-     */
     protected $database = "";
 
-    /**
-     * Database Configuration for read-only slave
-     * 
-     * @var object|string|array CI DB ($this->db as default), CI specific group name or CI database config array
-     */
     protected $databaseRead = "";
     
-    /**
-     * Table name
-     *
-     * @var string
-     */
     protected $table = "";
 
-    /**
-     * Table alias name
-     *
-     * @var string
-     */
     protected $alias = null;
 
-    /**
-     * Primary key of table
-     *
-     * @var string Field name of single column primary key
-     */
     protected $primaryKey = 'id';
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
     protected $timestamps = true;
 
-    /**
-     * Date format for timestamps.
-     *
-     * @var string unixtime|datetime
-     */
     protected $dateFormat = 'datetime';
 
-    /**
-     * @string Feild name for created_at, empty is disabled.
-     */
     const CREATED_AT = 'created_at';
 
-    /**
-     * @string Feild name for updated_at, empty is disabled.
-     */
     const UPDATED_AT = 'updated_at';
 
-    /**
-     * CREATED_AT triggers UPDATED_AT.
-     *
-     * @var bool
-     */
     protected $createdWithUpdated = true;
 
-    /**
-     * @var string Feild name for SOFT_DELETED, empty is disabled.
-     */
     const SOFT_DELETED = '';
 
-    /**
-     * The active value for SOFT_DELETED
-     *
-     * @var mixed
-     */
     protected $softDeletedFalseValue = '0';
 
-    /**
-     * The deleted value for SOFT_DELETED
-     *
-     * @var mixed
-     */
     protected $softDeletedTrueValue = '1';
 
-    /**
-     * This feature is actvied while having SOFT_DELETED
-     *
-     * @var string Feild name for deleted_at, empty is disabled.
-     */
     const DELETED_AT = '';
 
-    /**
-     * Check property schema for write
-     *
-     * @var boolean
-     */
     protected $propertyCheck = false;
 
-    /**
-     * @var array Validation errors (depends on validator driver)
-     */
     protected $_errors;
 
-    /**
-     * @var object database connection for write
-     */
     protected $_db;
 
-    /**
-     * @var object database connection for read (Salve)
-     */
     protected $_dbr;
 
-    /**
-     * @var object database caches by database key for write
-     */
     protected static $_dbCaches = [];
     
-    /**
-     * @var object database caches by database key for read (Salve)
-     */
     protected static $_dbrCaches = [];
 
-    /**
-     * @var object ORM schema caches by model class namespace
-     */
     private static $_ormCaches = [];
 
-    /**
-     * @var bool SOFT_DELETED one time switch
-     */
     private $_withoutSoftDeletedScope = false;
 
-    /**
-     * @var bool Global Scope one time switch
-     */
     private $_withoutGlobalScope = false;
 
-    /**
-     * ORM read properties
-     *
-     * @var array
-     */
     private $_readProperties = [];
 
-    /**
-     * ORM write properties
-     *
-     * @var array
-     */
     private $_writeProperties = [];
 
-    /**
-     * ORM self query
-     *
-     * @var string
-     */
     private $_selfCondition = null;
 
-    /**
-     * Clean next find one time setting
-     *
-     * @var boolean
-     */
     private $_cleanNextFind = false;
 
-    /**
-     * Relationship property caches by method name
-     *
-     * @var array
-     */
     private $_relationshipCaches = [];
 
-    /**
-     * Constructor
-     */
-    function __construct()
+    public function __construct()
     {
-        /* Database Connection Setting */
-        // Master
         if ($this->database) {
             if (is_object($this->database)) {
-                // CI DB Connection
                 $this->_db = $this->database;
             } 
             elseif (is_string($this->database)) {
-                // Cache Mechanism
                 if (isset(self::$_dbCaches[$this->database])) {
                     $this->_db = self::$_dbCaches[$this->database];
                 } else {
-                    // CI Database Configuration
                     $this->_db = get_instance()->load->database($this->database, true);
                     self::$_dbCaches[$this->database] = $this->_db;
                 }
             }
             else {
-                // Config array for each Model
                 $this->_db = get_instance()->load->database($this->database, true);
             }
         } else {
-            // CI Default DB Connection
             $this->_db = $this->_getDefaultDB();
         }
-        // Slave
+        
         if ($this->databaseRead) {
             if (is_object($this->databaseRead)) {
-                // CI DB Connection
                 $this->_dbr = $this->databaseRead;
             } 
             elseif (is_string($this->databaseRead)) {
-                // Cache Mechanism
                 if (isset(self::$_dbrCaches[$this->databaseRead])) {
                     $this->_dbr = self::$_dbrCaches[$this->databaseRead];
                 } else {
-                    // CI Database Configuration
                     $this->_dbr = get_instance()->load->database($this->databaseRead, true);
                     self::$_dbrCaches[$this->databaseRead] = $this->_dbr;
                 }
             }
             else {
-                // Config array for each Model
                 $this->_dbr = get_instance()->load->database($this->databaseRead, true);
             }
         } else {
-            // CI Default DB Connection
             $this->_dbr = $this->_getDefaultDB();
         }
         
-        /* Table Name Guessing */
         if (!$this->table) {
             $this->table = str_replace('_model', '', strtolower(get_called_class()));
         }
     }
 
-    /**
-     * Get Master Database Connection
-     * 
-     * @return object CI &DB
-     */
+    //public function __get($key)
+    // {
+    //  return get_instance()->$key;
+    // }
+
     public function getDatabase()
     {
         return $this->_db;
     }
 
-    /**
-     * Get Slave Database Connection
-     * 
-     * @return object CI &DB
-     */
     public function getDatabaseRead()
     {
         return $this->_dbr;
     }
 
-    /**
-     * Alias of getDatabase()
-     */
     public function getDB()
     {
         return $this->getDatabase();
     }
 
-    /**
-     * Alias of getDatabaseRead()
-     */
     public function getDBR()
     {
         return $this->getDatabaseRead();
     }
 
-    /**
-     * Alias of getDatabaseRead()
-     */
     public function getBuilder()
     {
         return $this->getDatabaseRead();
     }
 
-    /**
-     * Get table name
-     *
-     * @return string Table name
-     */
     public function getTable()
     {
         return $this->table;
     }
 
-    /**
-     * Alias of getTable()
-     */
     public function tableName()
     {
         return $this->getTable();
     }
 
-    /**
-     * Returns the filter rules for validation.
-     *
-     * @return array Filter rules. [[['attr1','attr2'], 'callable'],]
-     */
     public function filters()
     {
         return [];
     }
 
-    /**
-     * Returns the validation rules for attributes.
-     * 
-     * @see https://www.codeigniter.com/userguide3/libraries/form_validation.html#rule-reference
-     * @return array validation rules. (CodeIgniter Rule Reference)
-     */
     public function rules()
     {
         return [];
     }
 
-    /**
-     * Performs the data validation with filters
-     * 
-     * ORM only performs validation for assigned properties.
-     * 
-     * @param array Data of attributes
-     * @param boolean Return filtered data
-     * @return boolean Result
-     * @return mixed Data after filter ($returnData is true)
-     */
     public function validate($attributes=[], $returnData=false)
     {
         // Data fetched by ORM or input
@@ -1666,8 +1525,7 @@ class Model extends \CI_Model implements \ArrayAccess
 
             // CI parent::__get() check
             if (property_exists(get_instance(), $name)) {
-                
-                return parent::__get($name);
+                return get_instance()->$name;
             }
 
             // Exception
