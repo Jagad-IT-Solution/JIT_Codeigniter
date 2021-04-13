@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'db5a8553ca4fb126d6803084ef97b6149b2603ce',
+    'reference' => 'bd919bc2718404902e17bbd531aa8a3e988bc71c',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -586,7 +586,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'db5a8553ca4fb126d6803084ef97b6149b2603ce',
+      'reference' => 'bd919bc2718404902e17bbd531aa8a3e988bc71c',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -982,15 +982,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ad0bd91bce2054103f5eaa18ebeba8d3bc2a0572',
-    ),
-    'yidas/codeigniter-model' => 
-    array (
-      'pretty_version' => '2.19.2',
-      'version' => '2.19.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5cfce5821ab4261b5d8ea36894a14f4253acf68f',
     ),
   ),
 );

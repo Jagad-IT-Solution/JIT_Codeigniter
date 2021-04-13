@@ -4479,50 +4479,6 @@
                 }
             ],
             "install-path": "../symfony/string"
-        },
-        {
-            "name": "yidas/codeigniter-model",
-            "version": "2.19.2",
-            "version_normalized": "2.19.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidas/codeigniter-model.git",
-                "reference": "5cfce5821ab4261b5d8ea36894a14f4253acf68f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yidas/codeigniter-model/zipball/5cfce5821ab4261b5d8ea36894a14f4253acf68f",
-                "reference": "5cfce5821ab4261b5d8ea36894a14f4253acf68f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "time": "2020-02-25T02:42:20+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "CodeIgniter 3 ORM Base Model pattern with My_model example",
-            "homepage": "https://github.com/yidas/codeigniter-model",
-            "keywords": [
-                "MY_Model",
-                "base model",
-                "codeigniter",
-                "model"
-            ],
-            "support": {
-                "issues": "https://github.com/yidas/codeigniter-model/issues",
-                "source": "https://github.com/yidas/codeigniter-model"
-            },
-            "install-path": "../yidas/codeigniter-model"
         }
     ],
     "dev": true,

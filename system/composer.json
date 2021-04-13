@@ -29,8 +29,7 @@
         "norkunas/onesignal-php-api": "2.2.0",
         "longman/telegram-bot": "^0.70.1",
         "markbaker/matrix": "2.0",
-        "filp/whoops": "^2.12",
-        "yidas/codeigniter-model": "^2.19"
+        "filp/whoops": "^2.12"
     },
     "require-dev": {
         "kint-php/kint": "^3.3"
