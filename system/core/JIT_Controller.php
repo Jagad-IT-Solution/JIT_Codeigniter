@@ -675,7 +675,7 @@ class JIT_Controller
     {
         //if profiling enabled then print profiling data
         $isProfilingEnabled = $this->config->item('enable_profiling');
-        $data['code'] = $http_code > 0 || $http_code = $this->HTTP_OK;
+        $data['code'] = !isset($http_code) ? $this->HTTP_OK : $http_code;
         if (!$isProfilingEnabled) {
             ob_start();
             // If the HTTP status is not NULL, then cast as an integer
