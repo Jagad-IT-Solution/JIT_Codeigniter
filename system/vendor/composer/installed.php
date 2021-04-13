@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5c7862d11b5c0c15ad84c88a8f7096a1a13300a2',
+    'reference' => '5d173daa0c0de169410fafe1dfe79ebd53b25569',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -564,7 +564,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5c7862d11b5c0c15ad84c88a8f7096a1a13300a2',
+      'reference' => '5d173daa0c0de169410fafe1dfe79ebd53b25569',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
