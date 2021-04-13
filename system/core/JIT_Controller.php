@@ -2,37 +2,28 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
+
+$run     = new \Whoops\Run;
+$handler = new \Whoops\Handler\PrettyPageHandler;
+$handler->setPageTitle("Whoops! There was a problem.");
+$run->pushHandler($handler);
+if (\Whoops\Util\Misc::isAjaxRequest()) {
+    $run->pushHandler(new \Whoops\Handler\JsonResponseHandler);
+}
+$run->register();
+// $debug = new Run;
+// $debug->allowQuit(false);
+// $debug->writeToOutput(false);
+// $debug->pushHandler(new Handler\PrettyPageHandler);
+// $html = $debug->handleException($e);
+
+
 use \Firebase\JWT\JWT;
-// use Symfony\Component\Debug\Debug;
-// use Symfony\Component\Debug\DebugClassLoader;
-// use Symfony\Component\Debug\ErrorHandler;
-// use Symfony\Component\Debug\ExceptionHandler;
 
-// Debug::enable();
-// ErrorHandler::register();
-// DebugClassLoader::enable();
-// ExceptionHandler::register();
 
-function dd($print)
-{
-    Kint\Renderer\RichRenderer::$theme = 'solarized-dark.css';
-    Kint\Parser\BlacklistPlugin::$shallow_blacklist[] = 'Psr\Container\ContainerInterface';
-    !d($print);
-    Kint\Kint::trace(debug_backtrace(true));
-}
-
-function random_str($length = 32)
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
 
 require 'Format.php';
+require 'Helper.php';
 class JIT_Controller
 {
     /**
@@ -280,7 +271,7 @@ class JIT_Controller
 
         $this->request->ssl = is_https();
 
-        $this->request->method = $this->_detect_method();
+        $this->request->method = $this->input->method();
 
         $this->rest->key = null;
 
@@ -350,8 +341,8 @@ class JIT_Controller
     public function creatToken($data = null)
     {
         if ($data and is_array($data)) {
-            $data['iss'] = 'JAGAD IT SOLUTIONS';
-            $data['aud'] = 'JIT';
+            $data['iss'] = $_SERVER['HTTP_HOST'];
+            $data['aud'] = $_SERVER['SERVER_NAME'];
             $data['iat'] =  time();
             if ($this->token_expired != FALSE) {
                 $data['exp'] =  time() + $this->token_expired;
@@ -910,7 +901,7 @@ class JIT_Controller
         return $this->_get_default_output_format();
     }
 
-    public function addMethod($method)
+    public function _add_method($method)
     {
         $default = $this->allowed_http_methods;
         if (is_array($method)) {
@@ -919,9 +910,10 @@ class JIT_Controller
             array_push($default, $method);
         }
         $this->allowed_http_methods = $default;
+        return $this;
     }
 
-    public function deleteMethod($method)
+    public function _delete_method($method)
     {
         $default = $this->allowed_http_methods;
         if (!is_array($method)) {
@@ -929,29 +921,11 @@ class JIT_Controller
         }
         $default = \array_diff($default, $method);
         $this->allowed_http_methods = $default;
+        return $this;
     }
 
-    protected function _detect_method()
+    public function _detect_method()
     {
-        // Declare a variable to store the method
-        $method = null;
-
-        // Determine whether the 'enable_emulate_request' setting is enabled
-        // if ($this->config->item('enable_emulate_request') === true) {
-        //     $method = $this->input->post('_method');
-        //     if ($method === null) {
-        //         $method = $this->input->server('HTTP_X_HTTP_METHOD_OVERRIDE');
-        //     }
-
-        //     $method = strtolower($method);
-        // }
-
-        // if (empty($method)) {
-        //     // Get the request method as a lowercase string
-        //     $method = $this->input->method();
-        // }
-        // return in_array($method, $this->allowed_http_methods) && method_exists($this, '_parse_'.$method) ? $method : 'get';
-
         return $this->input->method();
     }
 

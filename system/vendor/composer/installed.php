@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '762fef7629fa11e9f07ad4e2ba242d241802ede2',
+    'reference' => 'd48e9128cbbdd738686ca477854322b59a806a95',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -73,6 +73,15 @@
       array (
       ),
       'reference' => '9d94dc0154230ac39e5bf89398b324a86f63f765',
+    ),
+    'filp/whoops' => 
+    array (
+      'pretty_version' => '2.12.0',
+      'version' => '2.12.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd501fd2658d55491a2295ff600ae5978eaad7403',
     ),
     'firebase/php-jwt' => 
     array (
@@ -564,7 +573,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '762fef7629fa11e9f07ad4e2ba242d241802ede2',
+      'reference' => 'd48e9128cbbdd738686ca477854322b59a806a95',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -861,15 +870,6 @@
       array (
       ),
       'reference' => '864f326ad6951599b487aab3cc350a966c5cbd86',
-    ),
-    'symfony/debug' => 
-    array (
-      'pretty_version' => 'v4.4.20',
-      'version' => '4.4.20.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '157bbec4fd773bae53c5483c50951a5530a2cc16',
     ),
     'symfony/deprecation-contracts' => 
     array (
