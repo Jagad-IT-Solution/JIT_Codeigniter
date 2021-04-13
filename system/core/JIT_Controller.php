@@ -683,8 +683,7 @@ class JIT_Controller
                 // So as to be safe later on in the process
                 $http_code = (int) $http_code;
             }
-
-            // Set the output as NULL by default
+            
             $output = null;
 
             // If data is NULL and no HTTP status code provided, then display, error and exit
