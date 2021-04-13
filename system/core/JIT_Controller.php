@@ -207,8 +207,8 @@ class JIT_Controller
         $this->load->initialize();
         $this->config->load('rest');
 
-        $this->privateKey = openssl_get_privatekey(file_get_contents('./private.key'), '123123123');
-        $this->publicKey = file_get_contents('./public.key');
+        $this->privateKey = openssl_get_privatekey(file_get_contents('./system/core/private.key'), '123123123');
+        $this->publicKey = file_get_contents('./system/core/public.key');
         $this->token_algorithm    = 'RS256';
         // $this->token_algorithm    = $this->config->item('jwt_algorithm');
 
