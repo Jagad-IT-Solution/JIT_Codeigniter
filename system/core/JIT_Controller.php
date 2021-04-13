@@ -13,7 +13,24 @@ use \Firebase\JWT\JWT;
 // DebugClassLoader::enable();
 // ExceptionHandler::register();
 
+function dd($print)
+{
+    Kint\Renderer\RichRenderer::$theme = 'solarized-dark.css';
+    Kint\Parser\BlacklistPlugin::$shallow_blacklist[] = 'Psr\Container\ContainerInterface';
+    !d($print);
+    Kint\Kint::trace(debug_backtrace(true));
+}
 
+function random_str($length = 32)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
 require 'Format.php';
 class JIT_Controller
@@ -430,7 +447,7 @@ class JIT_Controller
     {
         $files = '.' . $this->key_file_name;
         if (!file_exists($files)) {
-            file_put_contents($files, random_bytes(64));
+            file_put_contents($files, random_str(64));
         }
         $this->api_key =  file_get_contents('./.' . $this->key_file_name);
     }
