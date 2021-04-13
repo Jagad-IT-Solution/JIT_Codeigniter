@@ -50,7 +50,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/general/controllers.html
  */
-require_once './JIT_Controller.php';
+
+require_once('./system/core/JIT_Controller.php');
 class CI_Controller extends JIT_Controller
 {
 	/**
