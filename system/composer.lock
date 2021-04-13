@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db3bfd1c5fe30c9430254b48ce20775a",
+    "content-hash": "d62b761debfbbbde5c840d0d5ec67710",
     "packages": [
         {
             "name": "athlon1600/youtube-downloader",
@@ -2371,16 +2371,16 @@
         },
         {
             "name": "norkunas/onesignal-php-api",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/norkunas/onesignal-php-api.git",
-                "reference": "27dac13d6fd21b89b251c6ec4feb81d54b07b2de"
+                "reference": "a068a5f1002f0bfae0a745ce9815f112e03bebf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/norkunas/onesignal-php-api/zipball/27dac13d6fd21b89b251c6ec4feb81d54b07b2de",
-                "reference": "27dac13d6fd21b89b251c6ec4feb81d54b07b2de",
+                "url": "https://api.github.com/repos/norkunas/onesignal-php-api/zipball/a068a5f1002f0bfae0a745ce9815f112e03bebf4",
+                "reference": "a068a5f1002f0bfae0a745ce9815f112e03bebf4",
                 "shasum": ""
             },
             "require": {
@@ -2433,9 +2433,9 @@
             ],
             "support": {
                 "issues": "https://github.com/norkunas/onesignal-php-api/issues",
-                "source": "https://github.com/norkunas/onesignal-php-api/tree/v2.2.0"
+                "source": "https://github.com/norkunas/onesignal-php-api/tree/v2.3.0"
             },
-            "time": "2020-11-16T11:32:04+00:00"
+            "time": "2021-02-11T07:49:15+00:00"
         },
         {
             "name": "nyholm/psr7",
