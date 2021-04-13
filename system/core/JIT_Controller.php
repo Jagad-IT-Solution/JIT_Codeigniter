@@ -6,7 +6,6 @@ require 'Format.php';
 
 use \Firebase\JWT\JWT;
 
-
 class JIT_Controller
 {
     /**
@@ -21,9 +20,9 @@ class JIT_Controller
      *
      * @var CI_Loader
      */
-    public  $load;
+    public $load;
     // public  $allowed_http_methods = ['GET', 'DELETE', 'POST', 'PUT', 'OPTIONS', 'PATCH', 'HEAD'];
-    public  $allowed_http_methods = ['GET', 'POST', 'OPTIONS'];
+    public $allowed_http_methods = ['GET', 'POST', 'OPTIONS'];
 
     /**
      * Contains details about the response
@@ -32,26 +31,26 @@ class JIT_Controller
      *
      * @var object
      */
-    protected   $rest_format = null,
-        $methods = [],
-        $request = null,
-        $response = null,
-        $rest = null;
+    protected $rest_format = null;
+    protected $methods = [];
+    protected $request = null;
+    protected $response = null;
+    protected $rest = null;
 
     /**
      * The arguments from GET, POST, PUT, DELETE, PATCH, HEAD and OPTIONS request methods combined.
      *
      * @var array
      */
-    protected   $_get_args = [],
-        $_post_args = [],
-        $_put_args = [],
-        $_delete_args = [],
-        $_patch_args = [],
-        $_head_args = [],
-        $_options_args = [],
-        $_query_args = [],
-        $_args = [];
+    protected $_get_args = [];
+    protected $_post_args = [];
+    protected $_put_args = [];
+    protected $_delete_args = [];
+    protected $_patch_args = [];
+    protected $_head_args = [];
+    protected $_options_args = [];
+    protected $_query_args = [];
+    protected $_args = [];
 
     /**
      * The insert_id of the log entry (if we have one).
@@ -137,19 +136,19 @@ class JIT_Controller
 
     public $http_status;
 
-    protected   $HTTP_OK = 200,
-        $HTTP_CREATED = 201,
-        $HTTP_NOT_MODIFIED = 304,
-        $HTTP_BAD_REQUEST = 400,
-        $HTTP_UNAUTHORIZED = 401,
-        $HTTP_FORBIDDEN = 403,
-        $HTTP_NOT_FOUND = 404,
-        $HTTP_NOT_ACCEPTABLE = 406,
-        $HTTP_INTERNAL_ERROR = 500;
+    protected $HTTP_OK = 200;
+    protected $HTTP_CREATED = 201;
+    protected $HTTP_NOT_MODIFIED = 304;
+    protected $HTTP_BAD_REQUEST = 400;
+    protected $HTTP_UNAUTHORIZED = 401;
+    protected $HTTP_FORBIDDEN = 403;
+    protected $HTTP_NOT_FOUND = 404;
+    protected $HTTP_NOT_ACCEPTABLE = 406;
+    protected $HTTP_INTERNAL_ERROR = 500;
 
-    public $HTTP_RESPONSE,
-        $message,
-        $status = false;
+    public $HTTP_RESPONSE;
+    public $message;
+    public $status = false;
     /**
      * Extend this function to apply additional checking early on in the process.
      *
@@ -308,13 +307,13 @@ class JIT_Controller
         return self::$instance;
     }
 
-    function pass_hash($password)
+    public function pass_hash($password)
     {
         $options = ['cost' => 10];
         return password_hash($password, PASSWORD_DEFAULT, $options);
     }
 
-    function pass_verify($password, $hash)
+    public function pass_verify($password, $hash)
     {
         return password_verify($password, $hash);
     }
@@ -325,16 +324,16 @@ class JIT_Controller
             $data['iss'] = $_SERVER['HTTP_HOST'];
             $data['aud'] = $_SERVER['SERVER_NAME'];
             $data['iat'] =  time();
-            if ($this->token_expired != FALSE) {
+            if ($this->token_expired != false) {
                 $data['exp'] =  time() + $this->token_expired;
             }
             try {
                 return JWT::encode($data, $this->privateKey, $this->token_algorithm);
             } catch (Exception $e) {
-                return ['status' => FALSE, 'message' => $e->getMessage()];
+                return ['status' => false, 'message' => $e->getMessage()];
             }
         } else {
-            return ['status' => FALSE, 'message' => "Token Data Undefined!"];
+            return ['status' => false, 'message' => "Token Data Undefined!"];
         }
     }
 
@@ -343,7 +342,7 @@ class JIT_Controller
         try {
             return JWT::decode($token, $this->publicKey, array($this->token_algorithm));
         } catch (Exception $e) {
-            return ['status' => FALSE, 'message' => $e->getMessage()];
+            return ['status' => false, 'message' => $e->getMessage()];
         }
     }
 
@@ -358,7 +357,7 @@ class JIT_Controller
          * Authorization Header Exists
          */
         $token_data = $this->tokenIsExist($headers);
-        if ($token_data['status'] === TRUE) {
+        if ($token_data['status'] === true) {
             try {
                 /**
                  * Token Decode
@@ -366,21 +365,20 @@ class JIT_Controller
                 try {
                     $token_decode = JWT::decode($token_data['token'], $this->publicKey, array($this->token_algorithm));
                 } catch (Exception $e) {
-                    $this->response(['status' => FALSE, 'message' => $e->getMessage()], 500);
+                    $this->response(['status' => false, 'message' => $e->getMessage()], 500);
                 }
 
                 if (!empty($token_decode) and is_object($token_decode)) {
                     // Check Token API Time [exp]
-                    if ($this->token_expired != FALSE) {
+                    if ($this->token_expired != false) {
                         if (empty($token_decode->exp or !is_numeric($token_decode->exp))) {
-
-                            $this->response(['status' => FALSE, 'message' => 'Token Time Not Define!'], 403);
+                            $this->response(['status' => false, 'message' => 'Token Time Not Define!'], 403);
                         }
                     } else {
                         /**
-                         * Check Token Time Valid 
+                         * Check Token Time Valid
                          */
-                        return ['status' => TRUE, 'data' => $token_decode];
+                        return ['status' => true, 'data' => $token_decode];
                         // $time_difference = strtotime('now') - $token_decode->exp;
                         // if( $time_difference >= $this->token_expired ){
                         //    $this->response(['status' => FALSE, 'message' => 'Token Time Expire.'],403);
@@ -392,14 +390,14 @@ class JIT_Controller
                         // }
                     }
                 } else {
-                    $this->response(['status' => FALSE, 'message' => 'Forbidden'], 403);
+                    $this->response(['status' => false, 'message' => 'Forbidden'], 403);
                 }
             } catch (Exception $e) {
-                $this->response(['status' => FALSE, 'message' => $e->getMessage()], 500);
+                $this->response(['status' => false, 'message' => $e->getMessage()], 500);
             }
         } else {
             // Authorization Header Not Found!
-            $this->response(['status' => FALSE, 'message' => $token_data['message']], 403);
+            $this->response(['status' => false, 'message' => $token_data['message']], 403);
         }
     }
 
@@ -408,11 +406,12 @@ class JIT_Controller
     {
         if (!empty($headers) and is_array($headers)) {
             foreach ($headers as $header_name => $header_value) {
-                if (strtolower(trim($header_name)) == strtolower(trim($this->token_header)))
-                    return ['status' => TRUE, 'token' => str_replace('Bearer ', '', $header_value)];
+                if (strtolower(trim($header_name)) == strtolower(trim($this->token_header))) {
+                    return ['status' => true, 'token' => str_replace('Bearer ', '', $header_value)];
+                }
             }
         }
-        return ['status' => FALSE, 'message' => 'Token is not defined.'];
+        return ['status' => false, 'message' => 'Token is not defined.'];
     }
 
     public function create_key()
@@ -442,7 +441,6 @@ class JIT_Controller
         $use_key = !(isset($this->methods[$method]['key']) && $this->methods[$method]['key'] === false);
 
         if ($this->check_api_key && $use_key && $this->_allow === false) {
-
             if ($this->request->method == 'options') {
                 exit;
             }
@@ -677,6 +675,7 @@ class JIT_Controller
     {
         //if profiling enabled then print profiling data
         $isProfilingEnabled = $this->config->item('enable_profiling');
+        $data['code'] = $http_code > 0 || $http_code = $this->HTTP_OK;
         if (!$isProfilingEnabled) {
             ob_start();
             // If the HTTP status is not NULL, then cast as an integer
@@ -757,7 +756,7 @@ class JIT_Controller
                 }
             }
             ob_end_flush();
-            // Otherwise dump the output automatically
+        // Otherwise dump the output automatically
         } else {
             echo json_encode($data);
         }
