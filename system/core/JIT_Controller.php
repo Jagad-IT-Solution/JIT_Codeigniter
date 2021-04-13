@@ -3,15 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
 use \Firebase\JWT\JWT;
-use Symfony\Component\Debug\Debug;
-use Symfony\Component\Debug\DebugClassLoader;
-use Symfony\Component\Debug\ErrorHandler;
-use Symfony\Component\Debug\ExceptionHandler;
+// use Symfony\Component\Debug\Debug;
+// use Symfony\Component\Debug\DebugClassLoader;
+// use Symfony\Component\Debug\ErrorHandler;
+// use Symfony\Component\Debug\ExceptionHandler;
 
-Debug::enable();
-ErrorHandler::register();
-DebugClassLoader::enable();
-ExceptionHandler::register();
+// Debug::enable();
+// ErrorHandler::register();
+// DebugClassLoader::enable();
+// ExceptionHandler::register();
 
 
 
@@ -32,7 +32,7 @@ class JIT_Controller
      */
     public  $load;
     // public  $allowed_http_methods = ['GET', 'DELETE', 'POST', 'PUT', 'OPTIONS', 'PATCH', 'HEAD'];
-    public  $allowed_http_methods = ['GET', 'POST'];
+    public  $allowed_http_methods = ['GET', 'POST', 'OPTIONS'];
 
     /**
      * Contains details about the response
@@ -180,6 +180,9 @@ class JIT_Controller
      */
     protected $token_expired;
 
+    protected $privateKey;
+    protected $publicKey;
+
     protected function early_checks()
     {
         if (!isset($this->check_api_key)) {
@@ -204,11 +207,16 @@ class JIT_Controller
         $this->load->initialize();
         $this->config->load('rest');
 
+        $this->privateKey = openssl_get_privatekey(file_get_contents('../system/private.key'), '123123123');
+        $this->publicKey = file_get_contents('../system/public.key');
+
+
         $this->_enable_xss = ($this->config->item('global_xss_filtering') === true);
         $this->checkmethod = $this->config->item('check_method');
         $this->output->parse_exec_vars = false;
 
-        $this->token_algorithm    = $this->config->item('jwt_algorithm');
+        $this->token_algorithm    = 'RS256';
+        // $this->token_algorithm    = $this->config->item('jwt_algorithm');
         $this->token_header       = $this->config->item('token_header');
         $this->token_expired  = $this->config->item('token_expired');
 
@@ -330,7 +338,7 @@ class JIT_Controller
                 $data['exp'] =  time() + $this->token_expired;
             }
             try {
-                return JWT::encode($data, $this->api_key, $this->token_algorithm);
+                return JWT::encode($data, $this->privateKey, $this->token_algorithm);
             } catch (Exception $e) {
                 return ['status' => FALSE, 'message' => $e->getMessage()];
             }
@@ -342,7 +350,7 @@ class JIT_Controller
     public function decodeToken($token)
     {
         try {
-            return JWT::decode($token, $this->api_key, array($this->token_algorithm));
+            return JWT::decode($token, $this->publicKey, array($this->token_algorithm));
         } catch (Exception $e) {
             return ['status' => FALSE, 'message' => $e->getMessage()];
         }
@@ -365,7 +373,7 @@ class JIT_Controller
                  * Token Decode
                  */
                 try {
-                    $token_decode = JWT::decode($token_data['token'], $this->api_key, array($this->token_algorithm));
+                    $token_decode = JWT::decode($token_data['token'], $this->publicKey, array($this->token_algorithm));
                 } catch (Exception $e) {
                     $this->response(['status' => FALSE, 'message' => $e->getMessage()], 500);
                 }
@@ -420,7 +428,7 @@ class JIT_Controller
     {
         $files = '.' . $this->key_file_name;
         if (!file_exists($files)) {
-            file_put_contents($files, password_hash(rand(), PASSWORD_DEFAULT));
+            file_put_contents($files, random_bytes(64));
         }
         $this->api_key =  file_get_contents('./.' . $this->key_file_name);
     }
