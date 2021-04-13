@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db3bfd1c5fe30c9430254b48ce20775a",
+    "content-hash": "e00a4a429b6ea8efa9d2429269380ff4",
     "packages": [
         {
             "name": "athlon1600/youtube-downloader",
@@ -1809,16 +1809,16 @@
         },
         {
             "name": "longman/telegram-bot",
-            "version": "0.70.1",
+            "version": "0.71.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-telegram-bot/core.git",
-                "reference": "2093cffa2a8e0497d12183178e17cadcc1d0f6d5"
+                "reference": "9ca6158f9fe6cf5aa06f9c46377b3c1164bdf444"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-telegram-bot/core/zipball/2093cffa2a8e0497d12183178e17cadcc1d0f6d5",
-                "reference": "2093cffa2a8e0497d12183178e17cadcc1d0f6d5",
+                "url": "https://api.github.com/repos/php-telegram-bot/core/zipball/9ca6158f9fe6cf5aa06f9c46377b3c1164bdf444",
+                "reference": "9ca6158f9fe6cf5aa06f9c46377b3c1164bdf444",
                 "shasum": ""
             },
             "require": {
@@ -1906,7 +1906,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-25T20:07:09+00:00"
+            "time": "2021-03-05T13:53:31+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
