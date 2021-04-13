@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '5d173daa0c0de169410fafe1dfe79ebd53b25569',
+    'reference' => '271b6792360c5ac25111d8cdc8bb7c33733e9fc6',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -577,7 +577,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '5d173daa0c0de169410fafe1dfe79ebd53b25569',
+      'reference' => '271b6792360c5ac25111d8cdc8bb7c33733e9fc6',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -714,20 +714,6 @@ private static $installed = array (
       ),
       'reference' => '23ae1f00fbc6a886cbe3062ca682391b9cc7c37b',
     ),
-    'php-http/async-client-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '*',
-      ),
-    ),
-    'php-http/client-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '*',
-      ),
-    ),
     'php-http/message-factory' => 
     array (
       'pretty_version' => 'v1.0.2',
@@ -754,15 +740,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
-    ),
-    'psr/container' => 
-    array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8622567409010282b7aeebe4bb841fe98b58dcaf',
     ),
     'psr/http-client' => 
     array (
@@ -916,31 +893,6 @@ private static $installed = array (
       ),
       'reference' => '5fa56b4074d1ae755beb55617ddafe6f5d78f665',
     ),
-    'symfony/http-client' => 
-    array (
-      'pretty_version' => 'v5.2.6',
-      'version' => '5.2.6.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3c3075467da15bc2edf38d2ac20d34719e794bd8',
-    ),
-    'symfony/http-client-contracts' => 
-    array (
-      'pretty_version' => 'v2.3.1',
-      'version' => '2.3.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '41db680a15018f9c1d4b23516059633ce280ca33',
-    ),
-    'symfony/http-client-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '2.2',
-      ),
-    ),
     'symfony/options-resolver' => 
     array (
       'pretty_version' => 'v5.2.4',
@@ -1021,15 +973,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '7185bbc74e6f49c3f1b5936b4d9e4ca133921189',
-    ),
-    'symfony/service-contracts' => 
-    array (
-      'pretty_version' => 'v2.2.0',
-      'version' => '2.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd15da7ba4957ffb8f1747218be9e1a121fd298a1',
     ),
     'symfony/string' => 
     array (
