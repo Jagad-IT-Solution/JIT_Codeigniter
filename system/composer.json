@@ -10,10 +10,12 @@
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/bcit-ci/CodeIgniter"
     },
-    "authors": [{
-        "name": "Jagad IT Solutions",
-        "email": "masangga.com@gmail.com"
-    }],
+    "authors": [
+        {
+            "name": "Jagad IT Solutions",
+            "email": "masangga.com@gmail.com"
+        }
+    ],
     "require": {
         "phpoffice/phpspreadsheet": "^1.14",
         "firebase/php-jwt": "^5.2",
@@ -27,7 +29,7 @@
         "norkunas/onesignal-php-api": "2.2.0",
         "longman/telegram-bot": "^0.70.1",
         "symfony/debug": "^4.4",
-        "markbaker/matrix": "^2.1"
+        "markbaker/matrix": "2.0"
     },
     "require-dev": {
         "kint-php/kint": "^3.3"

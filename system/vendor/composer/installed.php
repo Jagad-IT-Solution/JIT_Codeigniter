@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '271b6792360c5ac25111d8cdc8bb7c33733e9fc6',
+    'reference' => '762fef7629fa11e9f07ad4e2ba242d241802ede2',
     'name' => 'jagad_it/ci_custome',
   ),
   'versions' => 
@@ -564,7 +564,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '271b6792360c5ac25111d8cdc8bb7c33733e9fc6',
+      'reference' => '762fef7629fa11e9f07ad4e2ba242d241802ede2',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
@@ -649,12 +649,12 @@
     ),
     'markbaker/matrix' => 
     array (
-      'pretty_version' => '2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '361c0f545c3172ee26c3d596a0aa03f0cef65e6a',
+      'reference' => '9567d9c4c519fbe40de01dbd1e4469dbbb66f46a',
     ),
     'monolog/monolog' => 
     array (
