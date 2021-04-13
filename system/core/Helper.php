@@ -1,5 +1,14 @@
 <?php
+$run     = new \Whoops\Run;
+$handler = new \Whoops\Handler\PrettyPageHandler;
+$handler->setPageTitle("Ups! Ada masalah.");
 
+if (\Whoops\Util\Misc::isAjaxRequest()) {
+    $run->pushHandler(new \Whoops\Handler\JsonResponseHandler);
+} else {
+    $run->pushHandler($handler);
+}
+$run->register();
 
 function dd($print)
 {

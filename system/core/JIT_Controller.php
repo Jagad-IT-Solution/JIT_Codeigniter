@@ -1,31 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
-
-
-$run     = new \Whoops\Run;
-$handler = new \Whoops\Handler\PrettyPageHandler;
-$handler->setPageTitle("Whoops! There was a problem.");
-
-if (\Whoops\Util\Misc::isAjaxRequest()) {
-    $run->pushHandler(new \Whoops\Handler\JsonResponseHandler);
-} else {
-    $run->pushHandler($handler);
-}
-$run->register();
-// $debug = new Run;
-// $debug->allowQuit(false);
-// $debug->writeToOutput(false);
-// $debug->pushHandler(new Handler\PrettyPageHandler);
-// $html = $debug->handleException($e);
-
+require 'Helper.php';
+require 'Format.php';
 
 use \Firebase\JWT\JWT;
 
 
-
-require 'Format.php';
-require 'Helper.php';
 class JIT_Controller
 {
     /**
