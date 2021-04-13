@@ -6,9 +6,11 @@ date_default_timezone_set('Asia/Jakarta');
 $run     = new \Whoops\Run;
 $handler = new \Whoops\Handler\PrettyPageHandler;
 $handler->setPageTitle("Whoops! There was a problem.");
-$run->pushHandler($handler);
+
 if (\Whoops\Util\Misc::isAjaxRequest()) {
     $run->pushHandler(new \Whoops\Handler\JsonResponseHandler);
+} else {
+    $run->pushHandler($handler);
 }
 $run->register();
 // $debug = new Run;
