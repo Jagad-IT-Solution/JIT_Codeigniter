@@ -207,16 +207,16 @@ class JIT_Controller
         $this->load->initialize();
         $this->config->load('rest');
 
-        $this->privateKey = openssl_get_privatekey(file_get_contents('../system/private.key'), '123123123');
-        $this->publicKey = file_get_contents('../system/public.key');
+        $this->privateKey = openssl_get_privatekey(file_get_contents('./private.key'), '123123123');
+        $this->publicKey = file_get_contents('./public.key');
+        $this->token_algorithm    = 'RS256';
+        // $this->token_algorithm    = $this->config->item('jwt_algorithm');
 
 
         $this->_enable_xss = ($this->config->item('global_xss_filtering') === true);
         $this->checkmethod = $this->config->item('check_method');
         $this->output->parse_exec_vars = false;
 
-        $this->token_algorithm    = 'RS256';
-        // $this->token_algorithm    = $this->config->item('jwt_algorithm');
         $this->token_header       = $this->config->item('token_header');
         $this->token_expired  = $this->config->item('token_expired');
 
@@ -308,6 +308,8 @@ class JIT_Controller
         );
 
         $this->early_checks();
+
+        log_message('info', 'JIT_Controller Class Initialized');
     }
 
     public static function &get_instance()
