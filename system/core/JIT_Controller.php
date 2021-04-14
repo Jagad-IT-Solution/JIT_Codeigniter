@@ -548,6 +548,13 @@ class JIT_Controller
         return isset($this->_post_args[$key]) ? $this->_xss_clean($this->_post_args[$key], $xss_clean) : null;
     }
 
+    public function get_post($key = null, $xss_clean = null)
+    {
+        $is_get = $this->get($key, $xss_clean);
+        $is_post = $this->post($key, $xss_clean);
+        return !isset($is_get) && empty($is_get) ? $is_post : $is_get;
+    }
+
     public function put($key = null, $xss_clean = null)
     {
         if ($key === null) {
