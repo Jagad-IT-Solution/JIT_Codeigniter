@@ -21,7 +21,7 @@
         "firebase/php-jwt": "^5.2",
         "smsgatewayme/client": "^0.0.1",
         "guzzlehttp/guzzle": "7.0",
-        "endroid/qr-code": "^3.9",
+        "endroid/qr-code": "^4.2",
         "kreait/firebase-php": "5.0",
         "google/cloud": "^0.142.0",
         "athlon1600/youtube-downloader": "^2.1",
